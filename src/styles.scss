@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@use "./styles/_variables.scss" as *;
 @use './styles/_breakpoints.scss' as *;
 @import 'ngx-toastr/toastr';
 
@@ -16,6 +16,7 @@ html {
 
 body {
   overflow-x: hidden;
+  background-color: $color-bg-primary;
   height: 100%;
 }
 h1 {
