@@ -1,0 +1,16 @@
+@use "../../../../styles/_variables.scss" as *;
+@use '../../../../styles/_breakpoints.scss' as *;
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+    border: 4px solid $color-border;
+    background-color: $color-bg-surface;
+    padding: 30px;
+
+    @include lg {
+        width: 50rem;
+    }
+}
