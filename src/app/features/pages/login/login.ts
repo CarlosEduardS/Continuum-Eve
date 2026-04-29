@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DefaultLoginLayout } from "../../layout/default-login-layout/default-login-layout";
+import { DefaultLoginLayout } from "../../../shared/layout/default-login-layout/default-login-layout";
 import { FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
-import { PrimaryInput } from "../../components/primary-input/primary-input";
+import { PrimaryInput } from "../../../shared/ui/primary-input/primary-input";
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login';
+import { LoginService } from '../../../services/login';
 import { ToastrService } from 'ngx-toastr';
 
 interface LoginForm {
