@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DefaultLoginLayout } from "../../../shared/layout/default-login-layout/default-login-layout";
 import { FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { PrimaryInput } from "../../../shared/ui/primary-input/primary-input";
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../services/login';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,7 +15,7 @@ interface LoginForm {
   selector: 'app-login',
   standalone: true,
   providers: [LoginService],
-  imports: [DefaultLoginLayout, ReactiveFormsModule, PrimaryInput],
+  imports: [DefaultLoginLayout, ReactiveFormsModule, PrimaryInput, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
