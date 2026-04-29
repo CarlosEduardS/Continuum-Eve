@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/_breakpoints.scss' as *;
+@import 'ngx-toastr/toastr';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 16px; // base pra cálculos em rem
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  height: 100%;
+}
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+img, video {
+  max-width: 100%;
+  display: block;
+}
