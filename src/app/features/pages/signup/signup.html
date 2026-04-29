@@ -1,0 +1,47 @@
+<app-default-login-layout
+    title="Crie sua conta!"
+    primaryButtonText="SignUp Now"
+    secondaryButtonText="Login Now"
+    (onSubmit)="submit()"
+    (onNavigate)="navigate()"
+    [disablePrimaryButton]="!SignupForm.valid"
+>
+    <form [formGroup]="SignupForm">
+        <app-primary-input
+            formControlName="name"
+            type="text"
+            inputName="name"
+            label="Nome"
+            placeHolder="Seu nome completo"
+        >
+            <img src="../../../assets/svg/email-icon.svg" alt="">
+        </app-primary-input>
+        <app-primary-input
+            formControlName="email"
+            type="email"
+            inputName="email"
+            label="Email"
+            placeHolder="exemplo2026@gmail.com"
+        >
+            <img src="../../../assets/svg/email-icon.svg" alt="">
+        </app-primary-input>
+        <app-primary-input
+            formControlName="password"
+            type="password"
+            inputName="password"
+            label="Password"
+            placeHolder="Crie uma senha forte"
+        >
+            <img src="../../../assets/svg/password-icon.svg" alt="">
+        </app-primary-input>
+        <app-primary-input
+            formControlName="passwordConfirme"
+            type="password"
+            inputName="passwordConfirme"
+            label="Confirmar Password"
+            placeHolder="Confirme sua senha"
+        >
+            <img src="../../../assets/svg/password-icon.svg" alt="">
+        </app-primary-input>
+    </form>
+</app-default-login-layout>
