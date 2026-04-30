@@ -75,6 +75,16 @@ main {
                 background-color: $color-text-placeholder;
                 border-color: $color-border-focus;
             }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+
+                &:hover {
+                    background-color: $color-bg-surface;
+                    border-color: transparent;
+                }
+            }
         }
     }
 }
