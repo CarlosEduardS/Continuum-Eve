@@ -1,0 +1,32 @@
+<app-default-login-layout
+    title="Bem-vindo de volta!"
+    primaryButtonText="Login Now"
+    secondaryButtonText="SignUp Now"
+    (onSubmit)="submit()"
+    (onNavigate)="navigate()"
+    [disablePrimaryButton]="!loginForm.valid"
+>
+    <form [formGroup]="loginForm">
+        <app-primary-input
+            formControlName="email"
+            type="email"
+            inputName="email"
+            label="Email"
+            placeHolder="exemplo2026@gmail.com"
+        >
+            <img src="../../../../assets/svg/email-icon.svg" alt="">
+        </app-primary-input>
+        <app-primary-input
+            formControlName="password"
+            type="password"
+            inputName="password"
+            label="Password"
+            placeHolder="Digite sua senha"
+        >
+            <img src="../../../../assets/svg/password-icon.svg" alt="">
+        </app-primary-input>
+        <a routerLink="/password-reset">Esqueceu a senha?</a>
+        <a routerLink="/home">Ir para a tela Home</a>
+    </form>
+</app-default-login-layout>
+<p></p>
