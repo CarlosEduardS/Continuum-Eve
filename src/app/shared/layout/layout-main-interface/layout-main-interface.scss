@@ -1,4 +1,5 @@
 @use "../../../../styles/_variables.scss" as *;
+@use "../../../../styles/_breakpoints.scss" as *;
 
 main {
     display: flex;
@@ -48,7 +49,10 @@ main {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 20px;
+
+        @include lg {
+            padding: 0 10rem;
+        }
 
         form {
             width: 100%;
@@ -74,6 +78,16 @@ main {
             &:hover {
                 background-color: $color-text-placeholder;
                 border-color: $color-border-focus;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+
+                &:hover {
+                    background-color: $color-bg-surface;
+                    border-color: transparent;
+                }
             }
         }
     }

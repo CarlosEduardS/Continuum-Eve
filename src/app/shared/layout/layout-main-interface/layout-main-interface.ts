@@ -1,19 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, Router } from "@angular/router";
+import { RouterLink} from "@angular/router";
+import { Auth } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-layout-main-interface',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './layout-main-interface.html',
   styleUrl: './layout-main-interface.scss',
 })
 export class LayoutMainInterface {
-  IsAdmin = true
+  IsAdmin = false;
 
-  constructor(private router: Router){}
+  constructor(public auth: Auth) {
+    this.IsAdmin = this.auth.IsAdmin;
+  }
 
-  ifAdmin(){
-    if (this.IsAdmin)
-      this.router.navigate(['/controller'])
+  toggleAdmin() {
+    this.auth.IsAdmin = !this.auth.IsAdmin;
+    this.IsAdmin = this.auth.IsAdmin;
   }
 }

@@ -1,6 +1,6 @@
 @use "./styles/_variables.scss" as *;
 @use './styles/_breakpoints.scss' as *;
-@import 'ngx-toastr/toastr';
+@use 'ngx-toastr/toastr' as *;
 
 *, *::before, *::after {
   box-sizing: border-box;
