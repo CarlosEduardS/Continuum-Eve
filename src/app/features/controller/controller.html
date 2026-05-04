@@ -1,6 +1,82 @@
 <app-layout-main-interface>
-    <form class="controller-form">
-        <h3>Controlador da Esteira Lagarta.</h3>
-        <p>Controle as operações da esteira lagarta através de um controle externo usando Bluetooth ou USB.</p>
+    <form>
+        <!-- ── Status de conexão ─────────────────────────────────────────────── -->
+        <div class="status-badge" [class.connected]="isConnected()">
+          <span class="status-dot"></span>
+          <span class="status-text">
+            @if (isConnected()) {
+              Controle conectado
+            } @else {
+              Aguardando controle...
+            }
+          </span>
+        </div>
+      
+        <!-- ── Instrução quando não há controle ─────────────────────────────── -->
+        @if (!isConnected()) {
+          <p class="hint">
+            Conecte um controle e pressione qualquer botão para ativar.
+          </p>
+        }
+      
+        <!-- ── HUD principal ─────────────────────────────────────────────── -->
+        @if (isConnected()) {
+          <div class="hud">
+      
+            <!-- Direção textual -->
+            <div class="direction-label">{{ direction() }}</div>
+      
+            <!-- Nome do controle -->
+            <p class="gamepad-id">{{ currentCommand().gamepadId }}</p>
+      
+            <!-- Velocidade (gatilhos) -->
+            <div class="gauge-group">
+              <div class="gauge">
+                <span class="gauge-label">Ré (LT)</span>
+                <div class="gauge-bar reverse">
+                  <div
+                    class="gauge-fill"
+                    [style.width.%]="currentCommand().y < 0 ? toPercent(currentCommand().y) : 0"
+                  ></div>
+                </div>
+              </div>
+      
+              <div class="gauge">
+                <span class="gauge-label">Frente (RT)</span>
+                <div class="gauge-bar">
+                  <div
+                    class="gauge-fill"
+                    [style.width.%]="currentCommand().y > 0 ? toPercent(currentCommand().y) : 0"
+                  ></div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Direção (analógico esquerdo) -->
+            <div class="steer-group">
+              <span class="gauge-label">Direção (analógico esq.)</span>
+              <div class="steer-bar">
+                <!-- Linha central fixa -->
+                <div class="steer-center"></div>
+                <!-- Indicador se move para esquerda ou direita -->
+                <div
+                  class="steer-indicator"
+                  [style.left]="'calc(50% + ' + toOffsetPercent(currentCommand().x) + '% * 0.45)'"
+                ></div>
+              </div>
+              <div class="steer-labels">
+                <span>ESQ</span>
+                <span>DIR</span>
+              </div>
+            </div>
+      
+            <!-- Valores brutos — útil pra debug e calibragem -->
+            <div class="raw-values">
+              <span>X: {{ currentCommand().x | number: '1.2-2' }}</span>
+              <span>Y: {{ currentCommand().y | number: '1.2-2' }}</span>
+            </div>
+      
+          </div>
+        }
     </form>
 </app-layout-main-interface>

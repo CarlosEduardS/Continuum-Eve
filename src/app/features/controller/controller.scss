@@ -1,6 +1,237 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/breakpoints' as *;
 
-h3, p {
-    color: $color-text-primary;
-    text-align: center;
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+// ── Status badge ────────────────────────────────────────────────────────────
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid $color-border;
+  background-color: $color-bg-surface;
+  font-size: 14px;
+  color: $color-text-secondary;
+  transition: all 0.3s ease;
+
+  &.connected {
+    border-color: $color-green-mid;
+    color: $color-green-mid;
+  }
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $color-text-placeholder;
+  transition: background-color 0.3s ease;
+
+  .connected & {
+    background-color: $color-green-mid;
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+// ── Hint ────────────────────────────────────────────────────────────────────
+
+.hint {
+  font-size: 14px;
+  color: $color-text-placeholder;
+  text-align: center;
+  max-width: 260px;
+}
+
+// ── HUD ─────────────────────────────────────────────────────────────────────
+
+.hud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+
+  padding: 24px;
+  border-radius: 16px;
+  border: 2px solid $color-border;
+  background-color: $color-bg-surface;
+
+  // Desktop: cresce até ocupar bem a área central, sem ficar colado nas bordas
+  @include lg {
+    max-width: 800px;
+    width: 90%;
+    gap: 28px;
+    padding: 40px 56px;
+  }
+}
+
+// ── Direção textual ──────────────────────────────────────────────────────────
+
+.direction-label {
+  font-size: 22px;
+  font-weight: 600;
+  color: $color-text-primary;
+  letter-spacing: 0.5px;
+
+  @include lg {
+    font-size: 32px;
+  }
+}
+
+.gamepad-id {
+  font-size: 11px;
+  color: $color-text-placeholder;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+
+  @include lg {
+    font-size: 13px;
+  }
+}
+
+// ── Gauges (barras dos gatilhos) ────────────────────────────────────────────
+
+.gauge-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gauge-label {
+  font-size: 12px;
+  color: $color-text-secondary;
+
+  @include lg {
+    font-size: 14px;
+  }
+}
+
+.gauge-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background-color: $color-bg-primary;
+  border: 1px solid $color-border;
+  overflow: hidden;
+
+  @include lg {
+    height: 18px;
+  }
+
+  &.reverse {
+    display: flex;
+    justify-content: flex-start;
+
+    .gauge-fill {
+      background-color: $color-lake;
+    }
+  }
+}
+
+.gauge-fill {
+  height: 100%;
+  border-radius: 999px;
+  background-color: $color-green-mid;
+  transition: width 0.05s linear;
+}
+
+// ── Barra de direção (steering) ──────────────────────────────────────────────
+
+.steer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.steer-bar {
+  position: relative;
+  width: 100%;
+  height: 18px;
+  border-radius: 999px;
+  background-color: $color-bg-primary;
+  border: 1px solid $color-border;
+
+  @include lg {
+    height: 24px;
+  }
+}
+
+.steer-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 70%;
+  background-color: $color-border;
+  border-radius: 2px;
+}
+
+.steer-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: $color-green-deep;
+  transition: left 0.05s linear;
+
+  @include lg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.steer-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: $color-text-placeholder;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  @include lg {
+    font-size: 12px;
+  }
+}
+
+// ── Valores brutos ───────────────────────────────────────────────────────────
+
+.raw-values {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  color: $color-text-placeholder;
+  font-family: monospace;
+
+  @include lg {
+    font-size: 14px;
+    gap: 48px;
+  }
 }
