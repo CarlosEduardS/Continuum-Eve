@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink} from "@angular/router";
-import { Auth } from '../../../core/services/auth';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-layout-main-interface',
@@ -12,12 +12,13 @@ import { Auth } from '../../../core/services/auth';
 export class LayoutMainInterface {
   IsAdmin = false;
 
-  constructor(public auth: Auth) {
-    this.IsAdmin = this.auth.IsAdmin;
+  constructor(public authService: AuthService) {
+    this.IsAdmin = this.authService.IsAdmin;
   }
 
+  //Botao de teste de rotas de admin
   toggleAdmin() {
-    this.auth.IsAdmin = !this.auth.IsAdmin;
-    this.IsAdmin = this.auth.IsAdmin;
+    this.authService.IsAdmin = !this.authService.IsAdmin;
+    this.IsAdmin = this.authService.IsAdmin;
   }
 }
