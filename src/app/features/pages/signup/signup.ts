@@ -1,56 +1,72 @@
+// src/app/features/pages/signup/signup.ts
+
 import { Component } from '@angular/core';
-import { DefaultLoginLayout } from "../../../shared/layout/default-login-layout/default-login-layout";
+import { DefaultLoginLayout } from '../../../shared/layout/default-login-layout/default-login-layout';
 import { FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
-import { PrimaryInput } from "../../../shared/ui/primary-input/primary-input";
+import { PrimaryInput } from '../../../shared/ui/primary-input/primary-input';
 import { Router } from '@angular/router';
-import { LoginService } from '../../../core/services/login';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface SignupForm {
-  name: FormControl;
-  email: FormControl;
-  password: FormControl;
-  passwordConfirme: FormControl;
+  username: FormControl<string | null>;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
+  passwordConfirme: FormControl<string | null>;
 }
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  providers: [LoginService],
   imports: [DefaultLoginLayout, ReactiveFormsModule, PrimaryInput],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
 export class Signup {
   SignupForm!: FormGroup<SignupForm>;
-  errorMessage = '';
 
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    private authService: AuthService,
     private toastService: ToastrService
   ) {
     this.SignupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       passwordConfirme: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+    });
   }
 
-  submit(){
-    if (this.SignupForm.value.passwordConfirme !== this.SignupForm.value.password) {
-      this.errorMessage = 'As senhas não coincidem.';
-    } else {
-      this.errorMessage = 'Erro ao criar conta. Tente novamente mais tarde.';
+  submit() {
+    if (this.SignupForm.invalid) return;
+
+    const { username, email, password, passwordConfirme } = this.SignupForm.value;
+
+    // Valida se as senhas coincidem antes de enviar pro backend
+    if (password !== passwordConfirme) {
+      this.toastService.error('As senhas não coincidem.');
+      return;
     }
-    this.loginService.login(this.SignupForm.value.email!, this.SignupForm.value.password!).subscribe({
-      next: () => this.toastService.success('Conta criada com sucesso!'),
-      error: () => this.toastService.error(this.errorMessage)
-    })
+
+    this.authService.register(username!, email!, password!).subscribe({
+      next: (response) => {
+        this.toastService.success(`Conta criada! Bem-vindo, ${response.username}!`);
+        // Redireciona pro home após criar a conta
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        // 409 = email já em uso
+        if (err.status === 409) {
+          this.toastService.error('Este email já está em uso.');
+        } else {
+          this.toastService.error('Erro ao criar conta. Tente novamente.');
+        }
+      }
+    });
   }
 
-  navigate(){
-    this.router.navigate(['/login'])
+  navigate() {
+    this.router.navigate(['/login']);
   }
 }
