@@ -1,10 +1,19 @@
 <main>
-    <header>
+    <header class="header-section">
         <img src="assets/svg/user-icon.svg" alt="Profile Icon" width="90">
         <h4>{{username}}</h4>
-        <hr>
     </header>
-    <section>
-
+    <div></div>
+    <section class="main-section">
+        <button class="config-btn">Trocar nome de Usuario<img src="assets/svg/arrow.svg" width="20"></button>
+        <button class="config-btn">Trocar Email<img src="assets/svg/arrow.svg" width="20"></button>
+        <button class="config-btn">Trocar Senha<img src="assets/svg/arrow.svg" width="20"></button>
+    </section>
+    <div></div>
+    <section class="btn-section">
+        <button class="route-btn" routerLink="/home"><img src="assets/svg/home.svg" width="40"></button>
+        <button class="route-btn" routerLink="/info"><img src="assets/svg/info.svg" width="40"></button>
+        <button class="route-btn" routerLink="/contact"><img src="assets/svg/headset.svg" width="40"></button>
+        <button class="route-btn" routerLink="/controller" [disabled]="!IsAdmin"><img src="assets/svg/remote-control.svg" width="40"></button>
     </section>
 </main>
