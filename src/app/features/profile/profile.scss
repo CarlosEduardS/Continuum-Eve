@@ -1,0 +1,138 @@
+@use "../../../styles/_variables" as *;
+@use "../../../styles/_breakpoints.scss" as *;
+
+main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 0 25px;
+    align-items: center;
+    justify-content: center;
+    
+    div {
+        height: 4px;
+        width: 100%;
+        background-color: $color-bg-surface;
+    }
+
+    .header-section {
+        width: 100%;
+        display: flex;
+        flex-grow: 0.1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        img {
+            border: 2px solid $color-bg-surface;
+            border-radius: 100%;
+        }
+        h4 {
+            color: $color-text-primary;
+            background-color: $color-bg-surface;
+            padding: 6px 26px;
+            border-radius: 12px;
+        }
+    }
+
+    .main-section {
+        flex-grow: 1.5;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-y: scroll;
+        gap: 10px;
+
+        @include lg {
+            padding: 0 10rem;
+        }
+
+        .config-btn {
+            background-color: $color-lake;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: 3px solid transparent;
+            outline: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &:hover {
+                background-color: $color-lake-hover;
+                border-color: $color-lake;
+                cursor: pointer;
+            }
+
+            @include lg {
+                width: 40%;
+                font-size: 28px;
+            }
+        }
+    }
+
+    .btn-section {
+        flex-grow: 0.1;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 0;
+        gap: 20px;
+
+        .route-btn {
+            background-color: $color-bg-surface;
+            border-radius: 12px;
+            padding: 5px;
+            border: 2px solid transparent;
+            outline: none;
+
+            &:hover {
+                background-color: $color-text-placeholder;
+                border-color: $color-border-focus;
+                cursor: pointer;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+
+                &:hover {
+                    background-color: $color-bg-surface;
+                    border-color: transparent;
+                }
+            }
+        }
+        
+        @include lg {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 340px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0 20px 20px 0;
+            box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            backdrop-filter: blur(8px);
+
+            .route-btn {
+                img {
+                    width: 45px;
+                }
+            }
+        }
+    }
+}

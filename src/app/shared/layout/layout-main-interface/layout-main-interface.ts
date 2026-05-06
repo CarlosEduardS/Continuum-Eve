@@ -10,15 +10,5 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './layout-main-interface.scss',
 })
 export class LayoutMainInterface {
-  IsAdmin = false;
-
-  constructor(public authService: AuthService) {
-    this.IsAdmin = this.authService.IsAdmin;
-  }
-
-  //Botao de teste de rotas de admin
-  toggleAdmin() {
-    this.authService.IsAdmin = !this.authService.IsAdmin;
-    this.IsAdmin = this.authService.IsAdmin;
-  }
+  IsAdmin = sessionStorage.getItem('isAdmin') === 'true';
 }
