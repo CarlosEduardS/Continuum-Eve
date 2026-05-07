@@ -8,6 +8,20 @@
     border-radius: 8px;
     border: 4px solid $color-border;
     background-color: $color-bg-surface;
-    padding: 30px;
-    width: 100%;
+    padding: 3dvh;
+    width: 88vw;
+
+    @include md {
+        width: 92vw;
+    }
+}
+
+.status-display {
+    height: 2dvh;
+    align-items: center;
+    justify-content: center;
+    
+    @include lg {
+        height: 15dvh;
+    }
 }

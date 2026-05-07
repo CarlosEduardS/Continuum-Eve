@@ -1,1 +1,30 @@
-<app-layout-main-interface></app-layout-main-interface>
+<app-layout-main-interface>
+    <form class="main">
+        <app-card>
+            <form>
+                <h3>Entre em Contato</h3>
+                <p>Tem dúvidas ou sugestões sobre o PROJECT-EDEN? Use o formulário abaixo para falar com a equipe.</p>
+            </form>
+        </app-card>
+
+        <app-card>
+            <form class="card-suggestion">
+                <h3>Entre em Contato</h3>
+                <p>Você já está autenticado como <strong>{{username}}</strong>. Envie sua mensagem abaixo:</p>
+
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" [(ngModel)]="message" placeholder="Escreva sua mensagem..."></textarea>
+
+                <button type="submit" (click)="SetMessageSuggestions()">Enviar</button>
+            </form>
+        </app-card>
+
+        <app-card>
+            <form>
+                <h3>Outros canais</h3>
+                <p>Email: contato@projecteden.com</p>
+                <p>Telefone: (11) 99999-9999</p>
+            </form>
+        </app-card>
+    </form>
+</app-layout-main-interface>

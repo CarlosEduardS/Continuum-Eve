@@ -17,7 +17,7 @@ main {
     }
 
     .main-section{
-        gap: 8px;
+        gap: 1dvh;
         display: none;
         flex-grow: 0;
 
@@ -30,7 +30,7 @@ main {
     }
 
     .form-section{
-        padding: 0 35px;
+        padding: 0 5dvh;
         flex-grow: 1;
 
         @include lg {
@@ -38,13 +38,13 @@ main {
         }
 
         img {
-            margin-bottom: 10px;
+            margin-bottom: 1dvh;
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 2.8dvh;
             color: $color-text-primary;
-            margin-bottom: 45px;
+            margin-bottom: 3dvh;
         }
 
         .btn-wrapper{
@@ -53,32 +53,32 @@ main {
             align-items: center;
             justify-content: center;
             width: 100%;
-            gap: 30px;
+            gap: 3dvh;
 
             .divider {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 20px;
+                gap: 2dvh;
                 width: 100%;
                 
-                font-size: 14px;
+                font-size: 1.6dvh;
                 color: $color-lake;
                 font-weight: 400;
                 text-transform: uppercase;
 
                 div {
                     flex-grow: 1;
-                    height: 2px;
+                    height: .2dvh;
                     background-color: $color-lake;
                 }
             }
             
             button {
                 width: 100%;
-                padding: 12px 24px;
+                padding: 1.2dvh 2.4dvh;
                 border-radius: 8px;
-                font-size: 16px;
+                font-size: 1.6dvh;
                 font-weight: 500;
                 border: none;
                 background-color: transparent;
@@ -91,11 +91,11 @@ main {
                 &.btnPrimary{
                     background-color: $color-green-deep;
                     color: white;
-                    box-shadow: 0px 8px 12px rgba(45, 90, 39, 0.3);
+                    box-shadow: 0px .8dvh 1.2dvh rgba(45, 90, 39, 0.3);
                 }
     
                 &.btnSecondary{
-                    border: 1px solid $color-green-deep;
+                    border: .1dvh solid $color-green-deep;
                     color: $color-green-deep;
                 }
 

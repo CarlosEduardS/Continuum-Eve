@@ -1,7 +1,79 @@
+@use "../../../styles/_variables.scss" as *;
+@use '../../../styles/_breakpoints.scss' as *;
+
 .main {
     padding: 60px 0 20px 0;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-right: 5px;
+    width: 100%;
+}
+
+.secondary {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.6dvh;
+    
+    @include lg {
+        flex-direction: row;
+        width: 100%;
+        gap: 20px;
+        font-size: 1.4vw;
+    }
+
+    @include md {
+        font-size: 3.2vw;
+    }
+}
+
+.primary {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 8px;
+    border: 4px solid $color-border;
+    background-color: $color-bg-surface;
+
+    align-items: center;
+    justify-content: space-between;
+    padding: 1dvh;
+
+    @include lg {
+        padding: 2dvh;
+        font-size: 2.7vw;
+    }
+
+    @include md {
+        font-size: 4vw;
+    }
+
+    .pulse-orbe {
+        border-radius: 100%;
+        background-color: $color-green-deep;
+        height: 1.5dvh;
+        width: 1.5dvh;
+        
+        @include lg {
+            height: 2dvh;
+            width: 2dvh;
+        }
+    
+        animation: pulse 1s ease-in-out infinite;
+    }
+}
+
+
+
+@keyframes pulse {
+    0%, 100% {
+        background-color: $color-green-deep;
+    } 50% {
+        background-color: $color-green-mid;
+    }
 }
