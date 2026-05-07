@@ -6,12 +6,12 @@ main {
     width: 100%;
     height: 100%;
     flex-direction: column;
-    padding: 0 25px;
+    padding: 0 2.5dvh;
     align-items: center;
     justify-content: center;
     
     div {
-        height: 4px;
+        height: .4dvh;
         width: 100%;
         background-color: $color-bg-surface;
     }
@@ -23,16 +23,16 @@ main {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        gap: 1.2dvh;
 
         img {
-            border: 2px solid $color-bg-surface;
+            border: .2dvh solid $color-bg-surface;
             border-radius: 100%;
         }
         h4 {
             color: $color-text-primary;
             background-color: $color-bg-surface;
-            padding: 6px 26px;
+            padding: .6dvh 2.6dvh;
             border-radius: 12px;
         }
     }
@@ -45,17 +45,13 @@ main {
         align-items: center;
         justify-content: center;
         overflow-y: scroll;
-        gap: 10px;
-
-        @include lg {
-            padding: 0 10rem;
-        }
+        gap: 1dvh;
 
         .config-btn {
             background-color: $color-lake;
             border-radius: 12px;
             width: 100%;
-            font-size: 24px;
+            font-size: 2.4dvh;
             padding: 10px 20px;
             border: 3px solid transparent;
             outline: none;
@@ -71,7 +67,7 @@ main {
 
             @include lg {
                 width: 40%;
-                font-size: 28px;
+                font-size: 2.8dvh;
             }
         }
     }
@@ -83,14 +79,14 @@ main {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding: 4px 0;
-        gap: 20px;
+        padding: .4dvh 0;
+        gap: 2dvh;
 
         .route-btn {
             background-color: $color-bg-surface;
             border-radius: 12px;
-            padding: 5px;
-            border: 2px solid transparent;
+            padding: .5dvh;
+            border: .2dvh solid transparent;
             outline: none;
 
             &:hover {
@@ -109,17 +105,17 @@ main {
                 }
             }
         }
-        
+
         @include lg {
             position: fixed;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 80px;
-            height: 340px;
+            width: 8dvh;
+            height: 36dvh;
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 0 20px 20px 0;
-            box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+            border-radius: 0 16px 16px 0;
+            box-shadow: .2dvh 0 .6dvh rgba(0,0,0,0.15);
 
             display: flex;
             flex-direction: column;
@@ -130,7 +126,7 @@ main {
 
             .route-btn {
                 img {
-                    width: 45px;
+                    width: 5dvh;
                 }
             }
         }
