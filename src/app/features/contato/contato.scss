@@ -1,0 +1,75 @@
+@use '../../../styles/_variables' as *;
+
+.main {
+    padding: 60px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-right: 5px;
+}
+
+.card-suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+
+  h3 {
+    color: $color-green-deep;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: $color-text-secondary;
+    font-size: 0.95rem;
+  }
+
+  label {
+    font-weight: 600;
+    color: $color-text-primary;
+    margin-bottom: 4px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-bg-surface;
+    font-size: 1rem;
+    color: $color-text-primary;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: none;
+    min-height: 120px;
+
+    &:focus {
+      border-color: $color-border-focus;
+      box-shadow: 0 0 6px rgba($color-green-mid, 0.4);
+    }
+
+    &::placeholder {
+      color: $color-text-placeholder;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: $color-green-mid;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-green-deep;
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
