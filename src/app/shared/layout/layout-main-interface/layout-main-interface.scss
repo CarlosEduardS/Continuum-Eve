@@ -53,11 +53,7 @@ main {
         overflow-y: scroll;
 
         @include lg {
-            padding: 0 20dvh;
-        }
-
-        form {
-            width: 100%;
+            padding: 0 12dvh;
         }
     }
 
