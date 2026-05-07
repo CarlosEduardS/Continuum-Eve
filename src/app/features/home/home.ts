@@ -10,5 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './home.scss',
 })
 export class Home {
-
+  status = 'ativo';
+  batery = '98%';
+  distance = 218;
+  TPlanted = 567;
+  AcPLanted = 23;
 }
