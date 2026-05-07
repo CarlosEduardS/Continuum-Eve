@@ -11,4 +11,12 @@ import { RouterLink } from "@angular/router";
 export class Profile {
   username = sessionStorage.getItem('username') || 'User';
   IsAdmin = sessionStorage.getItem('isAdmin') === 'true';
+  badge = ''
+
+  ngOnInit(){
+    if (this.IsAdmin)
+      this.badge = 'Administrador';
+    else
+      this.badge = 'Membro';
+  }
 }
