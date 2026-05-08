@@ -3,7 +3,7 @@
         <div class="primary">
             <div class="pulse-orbe"></div>
             <span>O robo esta atualmente: <b>{{status}}</b> </span>
-            <button>Visualizar</button>
+            <button>Ver Detalhes ></button>
         </div>
         <div class="secondary">
             <app-card type="status-display">
@@ -14,12 +14,34 @@
             <app-card type="status-display">
                 <form>
                     <p>Total de plantas plantadas: <b>{{TPlanted}}</b></p>
-                    <p>Numero atual de plantas plantadas: <b>{{AcPLanted}}</b></p>
+                    <p>Numero de plantas plantadas hoje: <b>{{AcPLanted}}</b></p>
                 </form>
             </app-card>
             <app-card type="status-display">
                 <form>
                     <p>Distancia detectada: <b>{{distance}}cm</b></p>
+                </form>
+            </app-card>
+        </div>
+        <app-card type="banner">
+            <form>
+                <p>Em desenvolvimento...</p>
+            </form>
+        </app-card>
+        <div class="secondary">
+            <app-card type="status-display">
+                <form>
+                    <p>INFO 1</p>
+                </form>
+            </app-card>
+            <app-card type="status-display">
+                <form>
+                    <p>INFO 2</p>
+                </form>
+            </app-card>
+            <app-card type="status-display">
+                <form>
+                    <p>INFO 3</p>
                 </form>
             </app-card>
         </div>
