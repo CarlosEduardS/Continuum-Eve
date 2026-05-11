@@ -28,7 +28,7 @@
         flex-direction: row;
         width: 100%;
         gap: 20px;
-        font-size: 1.42vw;
+        font-size: 1.2vw;
     }
 }
 
@@ -46,11 +46,13 @@
 
     @include md {
         font-size: 4vw;
+        height: 16vw;
     }
 
     @include lg {
         padding: 2dvh;
-        font-size: 2.7vw;
+        height: auto;
+        font-size: 2.2vw;
     }
 
     .pulse-orbe {
