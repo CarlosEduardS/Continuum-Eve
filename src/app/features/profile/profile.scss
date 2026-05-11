@@ -111,8 +111,8 @@ main {
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 8dvh;
-            height: 36dvh;
+            width: 12dvh;
+            height:48dvh;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 0 16px 16px 0;
             box-shadow: .2dvh 0 .6dvh rgba(0,0,0,0.15);
@@ -126,7 +126,7 @@ main {
 
             .route-btn {
                 img {
-                    width: 5dvh;
+                    width: 7dvh;
                 }
             }
         }
