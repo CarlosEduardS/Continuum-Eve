@@ -1,14 +1,14 @@
 <app-layout-main-interface>
     <form class="main">
         <div class="primary">
-            <div class="pulse-orbe"></div>
+            <div [class]="'pulse-orbe '+ status"></div>
             <span>O robo esta atualmente: <b>{{status}}</b> </span>
-            <button>Ver Detalhes ></button>
+            <button type="button" (click)="ToggleMap()">Ver Detalhes ></button>
         </div>
         <div class="secondary">
             <app-card type="status-display">
                 <form>
-                    <p>Nivel de bateria em: <b>{{batery}}</b></p>
+                    <p>Nivel de bateria em: {{charge}}<b>{{batery}}</b></p>
                 </form>
             </app-card>
             <app-card type="status-display">
@@ -47,3 +47,7 @@
         </div>
     </form>
 </app-layout-main-interface>
+
+@if (isMapTrue) {
+    <app-map-info-component (isReturn)="ToggleMap()"/>
+}
