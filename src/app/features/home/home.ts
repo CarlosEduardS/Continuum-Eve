@@ -11,18 +11,20 @@ import { MapInfoComponent } from "../../shared/ui/map-info-component/map-info-co
   styleUrl: './home.scss',
 })
 export class Home {
-  status = 'carregando';
+  status = 'ativo';
   batery = '98%';
   charge = ''
   distance = 218;
-  TPlanted = 567;
-  AcPLanted = 23;
+  TPlanted = 76234;
+  AcPlanted = 23;
 
   isMapTrue = false
 
   ngOnInit(){
     if (this.status === 'carregando')
       this.charge = '⚡'
+    else if (this.status === 'desativado')
+      this.charge = '❓'
   }
 
   ToggleMap() {
