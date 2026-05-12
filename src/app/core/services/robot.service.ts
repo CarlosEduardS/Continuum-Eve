@@ -10,7 +10,7 @@ export class RobotService {
   private http = inject(HttpClient);
 
   // URL base do Adan-Stella — ajustar quando o backend estiver pronto
-  private readonly apiUrl = 'http://localhost:5000/api/robot';
+  private readonly apiUrl = 'http://localhost:5171/api/robot';
 
   // ─── Stub ─────────────────────────────────────────────────────────────────
   // Por enquanto só loga no console
