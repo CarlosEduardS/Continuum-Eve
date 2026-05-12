@@ -60,12 +60,12 @@
     .pulse-orbe {
         border-radius: 100%;
         background-color: gray;
-        height: 1.5dvh;
-        width: 1.5dvh;
+        height: 2vw;
+        width: 2vw;
         
         @include lg {
-            height: 2dvh;
-            width: 2dvh;
+            height: 2vh;
+            width: 2vh;
         }
     }
 
