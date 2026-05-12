@@ -90,7 +90,11 @@
         border: 2px solid $color-border;
         border-radius: 12px;
         padding: .8vw;
-        font-size: 1.3vw;
+        font-size: 1.3vh;
+        
+        @include lg {
+            font-size: 1.3vw;
+        }
 
         &:hover {
             filter: brightness(0.95);
