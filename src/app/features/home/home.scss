@@ -44,8 +44,10 @@
     justify-content: space-between;
     padding: 1dvh;
 
+    font-size: 3.4vw;
+
     @include md {
-        font-size: 4vw;
+        font-size: 3.8vw;
         height: 16vw;
     }
 
@@ -57,7 +59,7 @@
 
     .pulse-orbe {
         border-radius: 100%;
-        background-color: $color-green-deep;
+        background-color: gray;
         height: 1.5dvh;
         width: 1.5dvh;
         
@@ -65,17 +67,42 @@
             height: 2dvh;
             width: 2dvh;
         }
-    
+    }
+
+    .ativo {
+        background-color: $color-green-deep;
         animation: pulse 1s ease-in-out infinite;
+    }
+
+    .carregando {
+        background-color: #838111;
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .desativado {
+        background-color: #771b1b;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    button {
+        background-color: $color-bg-light-surface;
+        color: $color-text-primary;
+        border: 2px solid $color-border;
+        border-radius: 12px;
+        padding: .8vw;
+        font-size: 1.3vw;
+
+        &:hover {
+            filter: brightness(0.95);
+            cursor: pointer;
+        }
     }
 }
 
-
-
 @keyframes pulse {
     0%, 100% {
-        background-color: $color-green-deep;
+        filter: brightness(1);
     } 50% {
-        background-color: $color-green-mid;
+        filter: brightness(1.6);
     }
 }
