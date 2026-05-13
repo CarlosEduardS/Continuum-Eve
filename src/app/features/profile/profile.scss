@@ -2,11 +2,13 @@
 @use "../../../styles/_breakpoints.scss" as *;
 
 // ─── Cores base dos banners ────────────────────────────────────────────────
-$banner-membro-bg:   #4A8C3F;
+$banner-membro-bg:   #335B2C;
 $banner-admin-bg:    #1C2B1A;
 $banner-admin-gold:  #C9A84C;
 $banner-admin-gold2: #d4b96a;
-$banner-main-bg-blur: #2d5a27;
+
+$button-color: #335B2C;
+$button-color-hover: #1C2B1A;
 
 main {
   display: flex;
@@ -33,25 +35,10 @@ main {
   margin-bottom: 16px;
   border-radius: 12px;
 
-  background-color: $banner-main-bg-blur;
-}
 
-// ─── Banner ────────────────────────────────────────────────────────────────
-.profile-banner {
-  width: 100%;
-  height: 160px;
-  border-radius: 12px 12px 0 0;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  // Tema padrão: membro
-  background: $banner-membro-bg;
-
-  // Tema admin — basta adicionar [class.admin]="isAdmin" no HTML
   &.admin {
-    background: $banner-admin-bg;
+    .profile-banner { background: $banner-admin-bg; }
+    .profile-username { color: $banner-admin-gold; }
 
     .banner-tag       { color: $banner-admin-gold; opacity: 0.85; }
     .banner-title     { color: $banner-admin-gold; }
@@ -59,9 +46,7 @@ main {
     .banner-right-main{ color: $banner-admin-gold2; }
     .banner-right-sub { color: $banner-admin-gold; opacity: 0.6; }
     .divline          { background: rgba(201, 168, 76, 0.15); }
-    .banner-center__circle {
-      border-color: rgba(201, 168, 76, 0.25);
-    }
+    .banner-center__circle { border-color: rgba(201, 168, 76, 0.25); }
     .banner-center__icon { color: $banner-admin-gold; opacity: 0.7; }
 
     // Blobs mais escuros pro admin
@@ -70,6 +55,20 @@ main {
     .blob-leaf-left    { background: rgba(45, 90, 39, 0.35); }
     .blob-leaf-right   { background: rgba(45, 90, 39, 0.30); }
   }
+}
+
+// ─── Banner ────────────────────────────────────────────────────────────────
+.profile-banner {
+  width: 100%;
+  height: 24vh;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  // Tema padrão: membro
+  background: $banner-membro-bg;
 }
 
 // ─── Blobs decorativos ─────────────────────────────────────────────────────
@@ -127,6 +126,7 @@ main {
   letter-spacing: 3px;
   color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
+  text-align: center;
 
   @include lg {
     font-size: 0.8vw;
@@ -139,6 +139,7 @@ main {
     color: #ffffff;
     line-height: 1;
     letter-spacing: 0.5px;
+    text-align: center;
 
     @include lg {
       font-size: 1.2vw;
@@ -146,6 +147,7 @@ main {
 }
 
 .banner-sub {
+    text-align: center;
     font-size: .8vh;
     color: rgba(168, 212, 160, 0.897);
     letter-spacing: 0.5px;
@@ -159,16 +161,17 @@ main {
     text-align: center;
     font-size: 1.2vh;
     color: rgba(200, 230, 196, 0.9);
-
+    
     letter-spacing: 0.5px;
     @include lg {
-      font-size: 1.2vw;
+        font-size: 1.2vw;
     }
 }
 
 .banner-right-sub {
     font-size: .8vh;
     color: rgba(122, 184, 114, 0.945);
+    text-align: center;
 
     @include lg {
       font-size: 0.7vw;
@@ -205,14 +208,12 @@ main {
 
 // ─── Avatar sobreposto ──────────────────────────────────────────────────────
 .avatar-wrapper {
-  margin-top: -44px; // sobe pra cima do banner
-  z-index: 3;
-  width: 90px;
-  height: 90px;
+  margin-top: -17vh; // sobe pra cima do banner
+  z-index: 100;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: $color-bg-surface;
-
-  border: 5px solid $banner-main-bg-blur;
   
   display: flex;
   align-items: center;
@@ -228,7 +229,11 @@ main {
 .profile-username {
   font-size: 18px;
   font-weight: 600;
-  color: $color-text-primary;
+  color: whitesmoke;
+  margin-bottom: 10px;
+
+  z-index: 9;
+
 }
 
 // ─── Main section ─────────────────────────────────────────────────────────
@@ -250,28 +255,28 @@ main {
         align-items: center;
         gap: 1vh;
 
-        button {
-            @include lg {
-                width: 80vw;
-            }
-        }
-
         .logout {
-            background-color: $color-bg-primary;
-            border: 2px solid $color-lake;
-            color: $color-lake;
+            border-color: $button-color-hover;
+            color: $button-color-hover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+            &:hover {
+                border-color: $button-color;
+                color: $button-color;
+            }
         }
     }
 
     button {
-        background-color: $color-water-refletion;
+        background-color: $color-bg-primary;
+        border: 2px solid $button-color;
+        color: $button-color;
         border-radius: 12px;
         width: 100%; 
         height: 8vh;
         font-size: 2.4dvh;
         
         padding: 10px 20px;
-        border: 3px solid transparent;
         
         outline: none;
         display: flex;
@@ -281,14 +286,15 @@ main {
         justify-content: space-between;
         
         &:hover {
-            background-color: $color-lake;
-            border-color: $color-water-refletion;
+            border-color: $button-color-hover;
+            background-color: $color-bg-surface;
+            color: $button-color-hover;
             cursor: pointer;
         }
         
         @include lg {
             height: 12vh;
-            width: 40%;
+            width: 100%;
             font-size: 2.8dvh;
         }
     }
@@ -307,48 +313,48 @@ main {
     
     .route-btn {
         background-color: $color-bg-surface;
-    border-radius: 12px;
-    padding: 0.5dvh;
-    border: 0.2dvh solid transparent;
-    outline: none;
-    
-    &:hover {
-      background-color: $color-text-placeholder;
-      border-color: $color-border-focus;
-      cursor: pointer;
-    }
-    
-    &:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        border-radius: 12px;
+        padding: 0.5dvh;
+        border: 0.2dvh solid transparent;
+        outline: none;
         
         &:hover {
-            background-color: $color-bg-surface;
-            border-color: transparent;
+        background-color: $color-text-placeholder;
+        border-color: $color-border-focus;
+        cursor: pointer;
+        }
+        
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            
+            &:hover {
+                background-color: $color-bg-surface;
+                border-color: transparent;
+            }
         }
     }
-}
 
-@include lg {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12dvh;
-    height: 48dvh;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 0 16px 16px 0;
-    box-shadow: 0.2dvh 0 0.6dvh rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    backdrop-filter: blur(8px);
-    
-    .route-btn img {
-        width: 7dvh;
+    @include lg {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12dvh;
+        height: 48dvh;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 0 16px 16px 0;
+        box-shadow: 0.2dvh 0 0.6dvh rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        backdrop-filter: blur(8px);
+        
+        .route-btn img {
+            width: 7dvh;
+        }
     }
-  }
 }
 
 .auto-display {

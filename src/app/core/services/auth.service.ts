@@ -1,5 +1,3 @@
-// src/app/services/auth.service.ts
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { tap } from 'rxjs';
@@ -69,5 +67,6 @@ export class AuthService {
     sessionStorage.setItem('userId', response.userId.toString());
     sessionStorage.setItem('isAdmin', response.isAdmin.toString());
     sessionStorage.setItem('imgUrl', response.imgUrl);
+    sessionStorage.setItem('dateCreate', response.createAt)
   }
 }

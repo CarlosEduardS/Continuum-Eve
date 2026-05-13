@@ -5,4 +5,5 @@ export type AuthResponse = {
   username: string;
   imgUrl: string;
   isAdmin: boolean;
+  createAt: string;
 }
