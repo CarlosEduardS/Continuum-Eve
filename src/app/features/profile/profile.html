@@ -1,20 +1,82 @@
 <main>
-    <header class="header-section">
-        <img src="assets/svg/user-icon.svg" alt="Profile Icon" width="90">
-        <h4>{{username}}</h4>
-        <h6>{{badge}}</h6>
-    </header>
-    <div></div>
-    <section class="main-section">
-        <button class="config-btn">Trocar nome de Usuario<img src="assets/svg/arrow.svg" width="20"></button>
-        <button class="config-btn">Trocar Email<img src="assets/svg/arrow.svg" width="20"></button>
-        <button class="config-btn">Trocar Senha<img src="assets/svg/arrow.svg" width="20"></button>
-    </section>
-    <div></div>
-    <section class="btn-section">
-        <button class="route-btn" routerLink="/home"><img src="assets/svg/home.svg" width="40"></button>
-        <button class="route-btn" routerLink="/info"><img src="assets/svg/info.svg" width="40"></button>
-        <button class="route-btn" routerLink="/contact"><img src="assets/svg/headset.svg" width="40"></button>
-        <button class="route-btn" routerLink="/controller" [disabled]="!IsAdmin"><img src="assets/svg/remote-control.svg" width="40"></button>
-    </section>
+  <div class="header-section">
+    <!-- Banner dinâmico: recebe classe 'admin' ou 'membro' do .ts -->
+    <div class="profile-banner" [class.admin]="isAdmin">
+      <div class="blob blob-tl"></div>
+      <div class="blob blob-bl"></div>
+      <div class="blob blob-tr"></div>
+      <div class="blob blob-br"></div>
+      <div class="blob blob-leaf-left"></div>
+      <div class="blob blob-leaf-right"></div>
+
+      <!-- Divisores laterais do centro -->
+      <div class="divline divline-left"></div>
+      <div class="divline divline-right"></div>
+
+      <!-- Lado esquerdo: cargo -->
+      <div class="banner-side banner-side--left">
+        <span class="banner-tag">Project-Éden</span>
+        <span class="banner-title">{{ isAdmin ? 'Administrador' : 'Membro' }}</span>
+        <span class="banner-sub">{{ isAdmin ? 'Acesso privilegiado' : 'Bem-vindo à comunidade' }}</span>
+      </div>
+
+      <!-- Centro: espaço reservado para a foto de perfil -->
+      <div class="banner-center">
+        <div class="banner-center__circle">
+          <!-- Ícone de admin no centro apenas para admins -->
+          @if (isAdmin) {
+            <span class="banner-center__icon">✦</span>
+          }
+        </div>
+      </div>
+
+      <!-- Lado direito: empresa -->
+      <div class="banner-side banner-side--right">
+        <span class="banner-tag">Áperos Imperium</span>
+        <span class="banner-right-main">Robótica · IA · Engenharia</span>
+        <span class="banner-right-sub">{{ isAdmin ? 'Admin' : 'Membro' }} desde 2025</span>
+      </div>
+    </div>
+
+    <!-- Foto de perfil sobreposta ao banner -->
+    <div class="avatar-wrapper">
+      <img src="assets/svg/user-icon.svg" alt="Profile Icon" class="avatar-img">
+    </div>
+
+    <h4 class="profile-username">{{ username | titlecase }}</h4>
+  </div>
+
+  <section class="main-section">
+    <div class="auto-display">
+        <button class="config-btn">
+          Trocar nome de Usuário <b>></b>
+        </button>
+        <button class="config-btn">
+          Trocar Email <b>></b>
+        </button>
+        <button class="config-btn">
+          Trocar Senha <b>></b>
+        </button>
+    </div>
+    <div class="more-buttons">
+        <button>Nao sei <b>></b></button>
+        <button>Nao sei <b>></b></button>
+        <button class="logout">Sair da conta <b>></b></button>
+    </div>
+  </section>
+
+  <section class="btn-section">
+    <button class="route-btn" routerLink="/home">
+      <img src="assets/svg/home.svg" width="40">
+    </button>
+    <button class="route-btn" routerLink="/info">
+      <img src="assets/svg/info.svg" width="40">
+    </button>
+    <button class="route-btn" routerLink="/contact">
+      <img src="assets/svg/headset.svg" width="40">
+    </button>
+    <button class="route-btn" routerLink="/controller" [disabled]="!isAdmin">
+      <img src="assets/svg/remote-control.svg" width="40">
+    </button>
+  </section>
 </main>
