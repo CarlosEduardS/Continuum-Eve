@@ -1,134 +1,376 @@
 @use "../../../styles/_variables" as *;
 @use "../../../styles/_breakpoints.scss" as *;
 
+// ─── Cores base dos banners ────────────────────────────────────────────────
+$banner-membro-bg:   #4A8C3F;
+$banner-admin-bg:    #1C2B1A;
+$banner-admin-gold:  #C9A84C;
+$banner-admin-gold2: #d4b96a;
+$banner-main-bg-blur: #2d5a27;
+
 main {
-    display: flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding: 2vh 2.5vw;
+  align-items: center;
+  justify-content: center;
+
+  @include lg {
+    padding: 5vh 10vw;
+  }
+}
+
+// ─── Header section ────────────────────────────────────────────────────────
+.header-section {
+  width: 100%;
+  flex-grow: 0.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+
+  background-color: $banner-main-bg-blur;
+}
+
+// ─── Banner ────────────────────────────────────────────────────────────────
+.profile-banner {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  // Tema padrão: membro
+  background: $banner-membro-bg;
+
+  // Tema admin — basta adicionar [class.admin]="isAdmin" no HTML
+  &.admin {
+    background: $banner-admin-bg;
+
+    .banner-tag       { color: $banner-admin-gold; opacity: 0.85; }
+    .banner-title     { color: $banner-admin-gold; }
+    .banner-sub       { color: $banner-admin-gold; opacity: 0.6; }
+    .banner-right-main{ color: $banner-admin-gold2; }
+    .banner-right-sub { color: $banner-admin-gold; opacity: 0.6; }
+    .divline          { background: rgba(201, 168, 76, 0.15); }
+    .banner-center__circle {
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+    .banner-center__icon { color: $banner-admin-gold; opacity: 0.7; }
+
+    // Blobs mais escuros pro admin
+    .blob-tl, .blob-tr { background: rgba(0, 0, 0, 0.25); }
+    .blob-bl, .blob-br { background: rgba(0, 0, 0, 0.20); }
+    .blob-leaf-left    { background: rgba(45, 90, 39, 0.35); }
+    .blob-leaf-right   { background: rgba(45, 90, 39, 0.30); }
+  }
+}
+
+// ─── Blobs decorativos ─────────────────────────────────────────────────────
+.blob {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.blob-tl { width: 180px; height: 140px; background: rgba(0,0,0,0.15); left: -50px; top: -30px; }
+.blob-bl { width: 130px; height: 100px; background: rgba(0,0,0,0.10); left: -20px; bottom: -20px; }
+.blob-tr { width: 180px; height: 140px; background: rgba(0,0,0,0.15); right: -50px; top: -30px; }
+.blob-br { width: 130px; height: 100px; background: rgba(0,0,0,0.10); right: -20px; bottom: -20px; }
+
+.blob-leaf-left  {
+  width: 120px; height: 90px;
+  background: rgba(74, 140, 63, 0.30);
+  left: 20px; top: 10px;
+  border-radius: 60% 40% 50% 60%;
+}
+.blob-leaf-right {
+  width: 100px; height: 75px;
+  background: rgba(74, 140, 63, 0.25);
+  right: 20px; bottom: 10px;
+  border-radius: 50% 60% 40% 55%;
+}
+
+// ─── Divisores ─────────────────────────────────────────────────────────────
+.divline {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.10);
+  z-index: 1;
+}
+.divline-left  { left: calc(50% - 50px); }
+.divline-right { left: calc(50% + 50px); }
+
+// ─── Lados do banner ───────────────────────────────────────────────────────
+.banner-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+.banner-tag {
+  font-size: .6vh;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+
+  @include lg {
+    font-size: 0.8vw;
+  }
+}
+
+.banner-title {
+    font-size: 1.3vh;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: 0.5px;
+
+    @include lg {
+      font-size: 1.2vw;
+    }
+}
+
+.banner-sub {
+    font-size: .8vh;
+    color: rgba(168, 212, 160, 0.897);
+    letter-spacing: 0.5px;
+
+    @include lg {
+      font-size: 0.7vw;
+    }
+}
+
+.banner-right-main {
+    text-align: center;
+    font-size: 1.2vh;
+    color: rgba(200, 230, 196, 0.9);
+
+    letter-spacing: 0.5px;
+    @include lg {
+      font-size: 1.2vw;
+    }
+}
+
+.banner-right-sub {
+    font-size: .8vh;
+    color: rgba(122, 184, 114, 0.945);
+
+    @include lg {
+      font-size: 0.7vw;
+    }
+}
+
+// ─── Centro do banner (espaço da foto) ─────────────────────────────────────
+.banner-center {
+  width: 100px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-center__circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.20);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-center__icon {
+  font-size: 24px;
+  color: #ffffff;
+  opacity: 0.4;
+}
+
+// ─── Avatar sobreposto ──────────────────────────────────────────────────────
+.avatar-wrapper {
+  margin-top: -44px; // sobe pra cima do banner
+  z-index: 3;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: $color-bg-surface;
+
+  border: 5px solid $banner-main-bg-blur;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+}
+
+// ─── Nome e badge ──────────────────────────────────────────────────────────
+.profile-username {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+// ─── Main section ─────────────────────────────────────────────────────────
+.main-section {
+    flex-grow: 1.5;
     width: 100%;
-    height: 100%;
+    display: flex;
     flex-direction: column;
-    padding: 0 2.5dvh;
     align-items: center;
     justify-content: center;
+    overflow-y: scroll;
+    gap: 4vh;
     
-    div {
-        height: .4dvh;
-        width: 100%;
-        background-color: $color-bg-surface;
-    }
-
-    .header-section {
-        width: 100%;
-        display: flex;
-        flex-grow: 0.1;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.2dvh;
-
-        img {
-            border: .2dvh solid $color-bg-surface;
-            border-radius: 100%;
-        }
-        h4 {
-            color: $color-text-primary;
-            background-color: $color-bg-surface;
-            padding: .6dvh 2.6dvh;
-            border-radius: 12px;
-        }
-    }
-
-    .main-section {
-        flex-grow: 1.5;
-        width: 100%;
+    .more-buttons {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        width: 100%;
         justify-content: center;
-        overflow-y: scroll;
-        gap: 1dvh;
+        align-items: center;
+        gap: 1vh;
 
-        .config-btn {
-            background-color: $color-water-refletion;
-            border-radius: 12px;
-            width: 100%;
-            font-size: 2.4dvh;
-            padding: 10px 20px;
-            border: 3px solid transparent;
-            outline: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-
-            &:hover {
-                background-color: $color-lake;
-                border-color: $color-water-refletion;
-                cursor: pointer;
-            }
-
+        button {
             @include lg {
-                width: 40%;
-                font-size: 2.8dvh;
+                width: 80vw;
             }
+        }
+
+        .logout {
+            background-color: $color-bg-primary;
+            border: 2px solid $color-lake;
+            color: $color-lake;
         }
     }
 
-    .btn-section {
-        flex-grow: 0.1;
-        width: 100%;
+    button {
+        background-color: $color-water-refletion;
+        border-radius: 12px;
+        width: 100%; 
+        height: 8vh;
+        font-size: 2.4dvh;
+        
+        padding: 10px 20px;
+        border: 3px solid transparent;
+        
+        outline: none;
         display: flex;
+        
         flex-direction: row;
         align-items: center;
-        justify-content: center;
-        padding: .4dvh 0;
-        gap: 2dvh;
-
-        .route-btn {
-            background-color: $color-bg-surface;
-            border-radius: 12px;
-            padding: .5dvh;
-            border: .2dvh solid transparent;
-            outline: none;
-
-            &:hover {
-                background-color: $color-text-placeholder;
-                border-color: $color-border-focus;
-                cursor: pointer;
-            }
-
-            &:disabled {
-                opacity: 0.4;
-                cursor: not-allowed;
-
-                &:hover {
-                    background-color: $color-bg-surface;
-                    border-color: transparent;
-                }
-            }
+        justify-content: space-between;
+        
+        &:hover {
+            background-color: $color-lake;
+            border-color: $color-water-refletion;
+            cursor: pointer;
         }
-
+        
         @include lg {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12dvh;
-            height:48dvh;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 0 16px 16px 0;
-            box-shadow: .2dvh 0 .6dvh rgba(0,0,0,0.15);
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-
-            backdrop-filter: blur(8px);
-
-            .route-btn {
-                img {
-                    width: 7dvh;
-                }
-            }
+            height: 12vh;
+            width: 40%;
+            font-size: 2.8dvh;
         }
+    }
+}
+
+// ─── Btn section ──────────────────────────────────────────────────────────
+.btn-section {
+    flex-grow: 0.1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4dvh 0;
+    gap: 2dvh;
+    
+    .route-btn {
+        background-color: $color-bg-surface;
+    border-radius: 12px;
+    padding: 0.5dvh;
+    border: 0.2dvh solid transparent;
+    outline: none;
+    
+    &:hover {
+      background-color: $color-text-placeholder;
+      border-color: $color-border-focus;
+      cursor: pointer;
+    }
+    
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        
+        &:hover {
+            background-color: $color-bg-surface;
+            border-color: transparent;
+        }
+    }
+}
+
+@include lg {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12dvh;
+    height: 48dvh;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0 16px 16px 0;
+    box-shadow: 0.2dvh 0 0.6dvh rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    backdrop-filter: blur(8px);
+    
+    .route-btn img {
+        width: 7dvh;
+    }
+  }
+}
+
+.auto-display {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 25vh;
+    
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 1.6vh;
+    
+    @include md {
+        font-size: 2.2vh;
+    }
+    
+    @include lg {
+        flex-direction: row;
+        width: 100%;
+        gap: 20px;
+        font-size: 1.1vw;
     }
 }

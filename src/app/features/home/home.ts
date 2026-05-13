@@ -15,7 +15,7 @@ function random(min: number, max: number) {
 })
 
 export class Home {
-  status = 'ativo';
+  status = 'carregando';
   batery = 100;
   charge = ''
   distance = 218;
@@ -37,10 +37,16 @@ constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
     this.ngZone.runOutsideAngular(() => {
       setInterval(() => {
         this.distance = random(10, 999);
-        this.batery -= 1;
+        if (this.status === 'ativo')
+          this.batery -= 1;
+        else if (this.status === 'carregando')
+          this.batery += 1;
 
-        if (this.batery === 0)
+        if (this.batery === -1)
           this.batery = 100;
+        else if (this.batery === 101)
+          this.batery = 0;
+
         this.cdr.markForCheck();
       }, 1000);
     });
