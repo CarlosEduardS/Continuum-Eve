@@ -85,13 +85,13 @@ main {
 .blob-leaf-left  {
   width: 120px; height: 90px;
   background: rgba(74, 140, 63, 0.30);
-  left: 10px; top: 7.5vh;
+  left: 10px; top: 7vh;
   border-radius: 60% 40% 50% 60%;
 }
 .blob-leaf-right {
   width: 130px; height: 105px;
   background: rgba(74, 140, 63, 0.25);
-  right: 10px; bottom: 7vh;
+  right: 10px; bottom: 6.5vh;
   border-radius: 50% 60% 40% 55%;
 }
 
@@ -190,8 +190,8 @@ main {
 }
 
 .banner-center__circle {
-  width: 76px;
-  height: 76px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.20);
   border: 1px dashed rgba(255, 255, 255, 0.15);
@@ -208,7 +208,7 @@ main {
 
 // ─── Avatar sobreposto ──────────────────────────────────────────────────────
 .avatar-wrapper {
-  margin-top: -17vh; // sobe pra cima do banner
+  margin-top: -17.5vh; // sobe pra cima do banner
   z-index: 100;
   width: 80px;
   height: 80px;
@@ -231,9 +231,7 @@ main {
   font-weight: 600;
   color: whitesmoke;
   margin-bottom: 10px;
-
   z-index: 9;
-
 }
 
 // ─── Main section ─────────────────────────────────────────────────────────
@@ -304,6 +302,7 @@ main {
 .btn-section {
     flex-grow: 0.1;
     width: 100%;
+    margin-top: 2vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -378,5 +377,14 @@ main {
         width: 100%;
         gap: 20px;
         font-size: 1.1vw;
+    }
+}
+hr {
+    margin-top: 3vh;
+    width: 100%;
+    color: $button-color;
+    opacity: 0.6;
+    @include lg {
+        display: none;
     }
 }
