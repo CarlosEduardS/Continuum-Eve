@@ -1,0 +1,62 @@
+@use "../../../../styles/_variables.scss" as *;
+@use "../../../../styles/_breakpoints.scss" as *;
+
+.btn-section {
+    flex-grow: 0.1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: .4dvh 0;
+    gap: 2dvh;
+
+    .route-btn {
+        background-color: $color-bg-surface;
+        border-radius: 12px;
+        padding: .4dvh;
+        border: .2dvh solid transparent;
+        outline: none;
+
+        &:hover {
+            background-color: $color-text-placeholder;
+            border-color: $color-border-focus;
+            cursor: pointer;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: $color-bg-surface;
+                border-color: transparent;
+            }
+        }
+    }
+
+    @include lg {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10vh;
+        height:40vh;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 0 16px 16px 0;
+        box-shadow: .2dvh 0 .6dvh rgba(0,0,0,0.15);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        backdrop-filter: blur(8px);
+
+        .route-btn {
+            img {
+                width: 6vh;
+            }
+        }
+    }
+}

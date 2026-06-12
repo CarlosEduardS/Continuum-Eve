@@ -1,10 +1,11 @@
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { NavFloat } from '../../shared/ui/nav-float/nav-float';
 
 @Component({
   selector: 'app-profile',
-  imports: [RouterLink, TitleCasePipe, DatePipe],
+  imports: [RouterLink, TitleCasePipe, DatePipe, NavFloat],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })
