@@ -1,7 +1,67 @@
+@use "../../../styles/_variables.scss" as *;
+@use '../../../styles/_breakpoints.scss' as *;
+
 .main {
-    padding: 60px 0 20px 0;
+    // Espaçamento confortável e centralizado na tela
+    padding: 40px 24px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-right: 5px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    // Quando a tela for grande (Desktop), transforma em um Grid elegante
+    @include lg {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); // Divide em 2 colunas iguais
+        gap: 24px;
+    }
+
+    // Estilização interna para organizar os textos dos cards
+    h3 {
+        color: #1b4d22; // O verde escuro marcante do Project-Éden
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: $color-text-primary;
+        margin-bottom: 12px;
+        
+        &:last-child {
+            margin-bottom: 0; // Remove a margem do último parágrafo
+        }
+    }
+
+    // Caso queira dar um destaque extra para as fórmulas matemáticas
+    span.formula, b {
+        font-family: 'Courier New', Courier, monospace; // Estilo mais técnico para fórmulas
+        background-color: $color-bg-light-surface;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #1b4d22;
+    }
+
+    // Faz o último card (que é o maior de todos) ocupar as duas colunas no Desktop
+    app-card:last-child {
+        @include lg {
+            grid-column: span 2; 
+            
+            // Organiza o conteúdo interno do card grande em duas colunas de texto
+            form {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                
+                h3 {
+                    grid-column: span 2;
+                }
+            }
+        }
+    }
 }

@@ -2,111 +2,115 @@
 @use '../../../styles/_breakpoints.scss' as *;
 
 .main {
-    padding: 60px 0 20px 0;
+    padding: 40px 24px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 20px;
     width: 100%;
-}
-
-.secondary {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 1.6dvh;
-    
-    @include md {
-        font-size: 3.2vw;
-    }
-    
-    @include lg {
-        flex-direction: row;
-        width: 100%;
-        gap: 20px;
-        font-size: 1.2vw;
-    }
+    max-width: 1200px; // Evita que o layout estique infinitamente em telas ultra-wide
+    margin: 0 auto;
 }
 
 .primary {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    border-radius: 8px;
-    border: 4px solid $color-border;
-    background-color: $color-bg-surface;
-
     align-items: center;
     justify-content: space-between;
-    padding: 1dvh;
+    width: 100%;
+    padding: 16px 24px;
+    
+    // Bordas finas e elegantes idênticas ao login
+    border: 1px solid $color-border; 
+    border-radius: 12px;
+    background-color: $color-bg-surface;
+    
+    font-size: 1rem;
+    color: $color-text-primary;
 
-    font-size: 3.4vw;
-
-    @include md {
-        font-size: 3.8vw;
-        height: 16vw;
-    }
-
-    @include lg {
-        padding: 2dvh;
-        height: auto;
-        font-size: 2.2vw;
-    }
-
-    .pulse-orbe {
-        border-radius: 100%;
-        background-color: gray;
-        height: 2vw;
-        width: 2vw;
+    span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
         
-        @include lg {
-            height: 2vh;
-            width: 2vh;
+        b {
+            text-transform: capitalize;
+            font-weight: 700;
         }
     }
 
+    .pulse-orbe {
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        flex-shrink: 0;
+    }
+
     .ativo {
-        background-color: $color-green-deep;
-        animation: pulse 1s ease-in-out infinite;
+        background-color: $color-green-deep; // Supondo que seja o verde escuro do login
+        box-shadow: 0 0 8px $color-green-deep;
+        animation: pulse 1.5s ease-in-out infinite;
     }
 
     .carregando {
-        background-color: #838111;
+        background-color: #d4af37; // Um dourado/amarelo mais elegante e menos opaco
+        box-shadow: 0 0 8px #d4af37;
         animation: pulse 1.5s ease-in-out infinite;
     }
 
     .desativado {
-        background-color: #771b1b;
-        animation: pulse 2s ease-in-out infinite;
+        background-color: #c0392b; // Um vermelho mais vivo e moderno
+        box-shadow: 0 0 8px #c0392b;
+        animation: pulse 1.5s ease-in-out infinite;
     }
 
     button {
-        background-color: $color-bg-light-surface;
-        color: $color-text-primary;
-        border: 2px solid $color-border;
-        border-radius: 12px;
-        padding: .8vw;
-        font-size: 1.3vh;
+        // Estilo baseado no botão sólido do seu Login
+        background-color: #1b4d22; // Substitua pela sua variável de verde escuro se houver
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
         
-        @include lg {
-            font-size: 1.3vw;
+        &:hover {
+            filter: brightness(1.1);
+            cursor: pointer;
+            transform: translateY(-1px);
         }
 
-        &:hover {
-            filter: brightness(0.95);
-            cursor: pointer;
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+.secondary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    
+    @include lg {
+        flex-direction: row;
+        align-items: stretch; // CRUCIAL: força todos os cards a esticarem até a altura do maior!
+        
+        & > * {
+            flex: 1; // Distribui a largura igualmente
+            display: flex; // Permite que o componente interno também se estique
         }
     }
 }
 
 @keyframes pulse {
     0%, 100% {
-        filter: brightness(1);
-    } 50% {
-        filter: brightness(1.6);
+        transform: scale(1);
+        opacity: 1;
+    } 
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
     }
 }

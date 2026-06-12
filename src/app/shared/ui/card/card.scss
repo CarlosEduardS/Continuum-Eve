@@ -4,49 +4,37 @@
 .card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    border-radius: 8px;
-    border: 4px solid $color-border;
+    gap: 12px;
+    border-radius: 12px;
+    border: 1px solid $color-border;
     background-color: $color-bg-surface;
-    padding: 3dvh;
-    width: 88vw;
-
-    @include md {
-        width: 92vw;
-    }
-
-    @include lg {
-        width: 100%;
+    padding: 24px;
+    width: 100%;
+    height: 100%; // Garante que o card ocupe toda a altura disponível do pai
+    flex-grow: 1; // Faz o card crescer se o espaço permitir
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: $color-text-primary;
+    
+    p {
+        margin: 0;
+        line-height: 1.5;
     }
 }
 
 .status-display {
-    height: 10vw;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    
-    @include lg {
-        height: 15dvh;
-    }
+    // Removido o min-height fixo daqui para evitar travar o layout
 }
 
 .banner {
-    margin-top: 1.8vw;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 20vw;
-    width: 100%;
+    min-height: 180px;
     background-color: $color-bg-light-surface;
-
-    @include md {
-        font-size: 4vw;
-        height: 22vw;
-    }
-
-    @include lg {
-        padding: 2dvh;
-        height: 14VW;
-        font-size: 2.4vw;
-    }
+    border: 1px dashed $color-border; // Um toque moderno para itens "Em desenvolvimento"
+    color: #7f8c8d;
+    font-size: 1.1rem;
 }
