@@ -1,45 +1,41 @@
 @use "../../../styles/_variables" as *;
 @use "../../../styles/_breakpoints.scss" as *;
 
-// ─── Cores base dos banners ────────────────────────────────────────────────
-$banner-membro-bg:   #335B2C;
-$banner-admin-bg:    #1C2B1A;
-$banner-admin-gold:  #C9A84C;
-$banner-admin-gold2: #d4b96a;
-
-$button-color: #335B2C;
-$button-color-hover: #1C2B1A;
+// ─── Cores base dos banners (Ajustadas para a sua paleta) ──────────────────
+$banner-membro-bg:   $color-green-deep; // Usa o seu verde escuro oficial
+$banner-admin-bg:     #1C2B1A;
+$banner-admin-gold:   #C9A84C;
+$banner-admin-gold2:  #d4b96a;
 
 main {
   display: flex;
   width: 100%;
-  height: 100%;
+  max-width: 1200px; // Evita que o conteúdo estique infinitamente em telas ultra-wide
+  margin: 0 auto;
   flex-direction: column;
-  padding: 2vh 2.5vw;
+  padding: 24px 16px;
   align-items: center;
-  justify-content: center;
 
   @include lg {
-    padding: 5vh 10vw;
+    padding: 40px 24px;
+    // Compensa a barra lateral de navegação fixa que você criou no desktop
+    padding-left: 120px; 
   }
 }
 
 // ─── Header section ────────────────────────────────────────────────────────
 .header-section {
   width: 100%;
-  flex-grow: 0.1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   border-radius: 12px;
-
 
   &.admin {
     .profile-banner { background: $banner-admin-bg; }
     .profile-username { color: $banner-admin-gold; }
-
     .banner-tag       { color: $banner-admin-gold; opacity: 0.85; }
     .banner-title     { color: $banner-admin-gold; }
     .banner-sub       { color: $banner-admin-gold; opacity: 0.6; }
@@ -49,26 +45,27 @@ main {
     .banner-center__circle { border-color: rgba(201, 168, 76, 0.25); }
     .banner-center__icon { color: $banner-admin-gold; opacity: 0.7; }
 
-    // Blobs mais escuros pro admin
     .blob-tl, .blob-tr { background: rgba(0, 0, 0, 0.25); }
     .blob-bl, .blob-br { background: rgba(0, 0, 0, 0.20); }
-    .blob-leaf-left    { background: rgba(45, 90, 39, 0.35); }
-    .blob-leaf-right   { background: rgba(45, 90, 39, 0.30); }
+    .blob-leaf-left    { background: rgba($color-green-deep, 0.35); }
+    .blob-leaf-right   { background: rgba($color-green-deep, 0.30); }
   }
 }
 
 // ─── Banner ────────────────────────────────────────────────────────────────
 .profile-banner {
   width: 100%;
-  height: 24vh;
+  height: 160px; // Altura fixa controlada para o crachá ficar simétrico
   border-radius: 12px;
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
-
-  // Tema padrão: membro
   background: $banner-membro-bg;
+
+  @include lg {
+    height: 180px;
+  }
 }
 
 // ─── Blobs decorativos ─────────────────────────────────────────────────────
@@ -76,7 +73,6 @@ main {
   position: absolute;
   border-radius: 50%;
 }
-
 .blob-tl { width: 180px; height: 140px; background: rgba(0,0,0,0.15); left: -50px; top: -30px; }
 .blob-bl { width: 130px; height: 100px; background: rgba(0,0,0,0.10); left: -20px; bottom: -20px; }
 .blob-tr { width: 180px; height: 140px; background: rgba(0,0,0,0.15); right: -50px; top: -30px; }
@@ -84,14 +80,14 @@ main {
 
 .blob-leaf-left  {
   width: 120px; height: 90px;
-  background: rgba(74, 140, 63, 0.30);
-  left: 10px; top: 7vh;
+  background: rgba($color-green-mid, 0.30);
+  left: 10px; top: 35px;
   border-radius: 60% 40% 50% 60%;
 }
 .blob-leaf-right {
   width: 130px; height: 105px;
-  background: rgba(74, 140, 63, 0.25);
-  right: 10px; bottom: 6.5vh;
+  background: rgba($color-green-mid, 0.25);
+  right: 10px; bottom: 30px;
   border-radius: 50% 60% 40% 55%;
 }
 
@@ -104,8 +100,8 @@ main {
   background: rgba(255, 255, 255, 0.10);
   z-index: 1;
 }
-.divline-left  { left: calc(50% - 50px); }
-.divline-right { left: calc(50% + 50px); }
+.divline-left  { left: calc(50% - 60px); }
+.divline-right { left: calc(50% + 60px); }
 
 // ─── Lados do banner ───────────────────────────────────────────────────────
 .banner-side {
@@ -117,70 +113,68 @@ main {
   gap: 4px;
   position: relative;
   z-index: 2;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .banner-tag {
-  font-size: .6vh;
-  font-weight: 400;
-  letter-spacing: 3px;
-  color: rgba(255, 255, 255, 0.55);
-  text-transform: uppercase;
+  font-size: 0.5rem;
+  font-weight: 500;
   text-align: center;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
 
-  @include lg {
-    font-size: 0.8vw;
+  #include lg {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
   }
 }
 
 .banner-title {
-    font-size: 1.3vh;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1;
-    letter-spacing: 0.5px;
-    text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
 
-    @include lg {
-      font-size: 1.2vw;
-    }
+  @include lg {
+    font-size: 1.25rem;
+  }
 }
 
 .banner-sub {
-    text-align: center;
-    font-size: .8vh;
-    color: rgba(168, 212, 160, 0.897);
-    letter-spacing: 0.5px;
+  color: rgba(200, 230, 196, 0.8);
+  font-size: 0.7rem;
+  text-align: center;
 
-    @include lg {
-      font-size: 0.7vw;
-    }
+  @include lg {
+    font-size: 0.9rem;
+  }
 }
 
 .banner-right-main {
-    text-align: center;
-    font-size: 1.2vh;
-    color: rgba(200, 230, 196, 0.9);
-    
-    letter-spacing: 0.5px;
-    @include lg {
-        font-size: 1.2vw;
-    }
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+
+  @include lg {
+    font-size: 1.1rem;
+  }
 }
 
 .banner-right-sub {
-    font-size: .8vh;
-    color: rgba(122, 184, 114, 0.945);
-    text-align: center;
+  color: rgba(200, 230, 196, 0.8);
+  font-size: 0.7rem;
+  text-align: center;
 
-    @include lg {
-      font-size: 0.7vw;
-    }
+  @include lg {
+    font-size: 0.9rem;
+  }
 }
 
 // ─── Centro do banner (espaço da foto) ─────────────────────────────────────
 .banner-center {
-  width: 100px;
+  width: 120px;
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -190,201 +184,126 @@ main {
 }
 
 .banner-center__circle {
-  width: 70px;
-  height: 70px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.20);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .banner-center__icon {
-  font-size: 24px;
+  font-size: 20px;
   color: #ffffff;
-  opacity: 0.4;
 }
 
 // ─── Avatar sobreposto ──────────────────────────────────────────────────────
 .avatar-wrapper {
-  margin-top: -17.5vh; // sobe pra cima do banner
-  z-index: 100;
-  width: 80px;
-  height: 80px;
+  margin-top: -45px; // Eleva perfeitamente baseado na nova altura controlada
+  z-index: 10;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: $color-bg-surface;
-  
+  background: $color-bg-primary;
+  border: 4px solid $color-bg-primary; // Cria a borda de recorte vazada elegante
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .avatar-img {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
 }
 
-// ─── Nome e badge ──────────────────────────────────────────────────────────
 .profile-username {
-  font-size: 18px;
-  font-weight: 600;
-  color: whitesmoke;
-  margin-bottom: 10px;
-  z-index: 9;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  margin-top: 4px;
+  margin-bottom: 16px;
 }
 
-// ─── Main section ─────────────────────────────────────────────────────────
+// ─── Estilização Unificada de Botões de Configuração ────────────────────────
 .main-section {
-    flex-grow: 1.5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  button {
+    background-color: $color-bg-light-surface;
+    border: 1px solid $color-border; // Reduzido de 4px para 1px minimalista!
+    color: $color-text-primary;
+    border-radius: 8px;
     width: 100%;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-y: scroll;
-    gap: 4vh;
-    
-    .more-buttons {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 1vh;
-
-        .logout {
-            border-color: $button-color-hover;
-            color: $button-color-hover;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
-            &:hover {
-                border-color: $button-color;
-                color: $button-color;
-            }
-        }
-    }
-
-    button {
-        background-color: $color-bg-primary;
-        border: 2px solid $button-color;
-        color: $button-color;
-        border-radius: 12px;
-        width: 100%; 
-        height: 8vh;
-        font-size: 2.4dvh;
-        
-        padding: 10px 20px;
-        
-        outline: none;
-        display: flex;
-        
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        
-        &:hover {
-            border-color: $button-color-hover;
-            background-color: $color-bg-surface;
-            color: $button-color-hover;
-            cursor: pointer;
-        }
-        
-        @include lg {
-            height: 12vh;
-            width: 100%;
-            font-size: 2.8dvh;
-        }
-    }
-}
-
-// ─── Btn section ──────────────────────────────────────────────────────────
-.btn-section {
-    flex-grow: 0.1;
-    width: 100%;
-    margin-top: 2vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4dvh 0;
-    gap: 2dvh;
-    
-    .route-btn {
-        background-color: $color-bg-surface;
-        border-radius: 12px;
-        padding: 0.5dvh;
-        border: 0.2dvh solid transparent;
-        outline: none;
-        
-        &:hover {
-        background-color: $color-text-placeholder;
-        border-color: $color-border-focus;
-        cursor: pointer;
-        }
-        
-        &:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            
-            &:hover {
-                background-color: $color-bg-surface;
-                border-color: transparent;
-            }
-        }
-    }
-
-    @include lg {
-        position: fixed;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 12dvh;
-        height: 48dvh;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 0 16px 16px 0;
-        box-shadow: 0.2dvh 0 0.6dvh rgba(0, 0, 0, 0.15);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        backdrop-filter: blur(8px);
-        
-        .route-btn img {
-            width: 7dvh;
-        }
-    }
-}
-
-.auto-display {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 25vh;
-    
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    font-size: 1.6vh;
-    
-    @include md {
-        font-size: 2.2vh;
+    transition: all 0.2s ease;
+    outline: none;
+
+    b {
+      color: $color-text-placeholder;
+      transition: color 0.2s ease;
     }
-    
-    @include lg {
-        flex-direction: row;
-        width: 100%;
-        gap: 20px;
-        font-size: 1.1vw;
+
+    &:hover {
+      border-color: $color-border-focus;
+      background-color: $color-bg-surface;
+      color: $color-green-deep;
+      cursor: pointer;
+
+      b {
+        color: $color-green-deep;
+      }
     }
-}
-hr {
-    margin-top: 3vh;
+  }
+
+  // Organização inteligente no Desktop
+  .auto-display, .more-buttons {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    color: $button-color;
-    opacity: 0.6;
+    gap: 12px;
+
     @include lg {
-        display: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); // Transforma em 3 colunas perfeitas lado a lado
+      gap: 16px;
     }
+  }
+
+  .more-buttons {
+    margin-top: 12px;
+
+    @include lg {
+      margin-top: 0;
+    }
+
+    .logout {
+      border-color: rgba(#c0392b, 0.3);
+      color: #c0392b;
+
+      b { color: rgba(#c0392b, 0.4); }
+
+      &:hover {
+        background-color: rgba(#c0392b, 0.05);
+        border-color: #c0392b;
+        color: #c0392b;
+        b { color: #c0392b; }
+      }
+    }
+  }
+}
+
+hr {
+  display: none; // Sumiu com as linhas divisórias brutas antigas
 }
