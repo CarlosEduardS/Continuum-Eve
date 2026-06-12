@@ -3,19 +3,20 @@ import { LayoutMainInterface } from "../../shared/layout/layout-main-interface/l
 import { Card } from "../../shared/ui/card/card";
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapInfoComponent } from "../../shared/ui/map-info-component/map-info-component";
+import { CommonModule } from '@angular/common';
 
 function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 @Component({
   selector: 'app-home',
-  imports: [LayoutMainInterface, Card, ReactiveFormsModule, MapInfoComponent],
+  imports: [LayoutMainInterface, Card, ReactiveFormsModule, MapInfoComponent, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 
 export class Home {
-  status = 'carregando';
+  status = 'ativo';
   batery = 100;
   charge = ''
   distance = 218;

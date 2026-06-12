@@ -1,9 +1,13 @@
 <app-layout-main-interface>
     <form class="main">
-        <div class="primary">
-            <div [class]="'pulse-orbe '+ status"></div>
-            <span>O robo esta atualmente: <b>{{status}}</b> </span>
-            <button type="button" (click)="ToggleMap()">Ver Detalhes ></button>
+        <div class="card-status-robot">
+            <div class="status-info">
+                <span [class]="'indicator-dot ' + status"></span>
+                <p>O robô está atualmente: <strong>{{status}}</strong></p>
+            </div>
+            <button class="details-btn">
+                Ver Detalhes <span>></span>
+            </button>
         </div>
         <div class="secondary">
             <app-card type="status-display">

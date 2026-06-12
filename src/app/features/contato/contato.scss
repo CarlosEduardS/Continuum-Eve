@@ -1,75 +1,128 @@
 @use '../../../styles/_variables' as *;
+@use '../../../styles/_breakpoints.scss' as *;
 
 .main {
-    padding: 60px 0 20px 0;
+    // Mantém o alinhamento centralizado e confortável idêntico às outras telas
+    padding: 40px 24px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-right: 5px;
+    gap: 24px; // Espaçamento elegante entre os dois cards
+    width: 100%;
+    max-width: 1000px; // Reduzi levemente o max-width para o formulário não ficar esticado demais em telas gigantes
+    margin: 0 auto;
+
+    // Garante que todo app-card dentro do main ocupe 100% da largura disponível
+    app-card {
+        width: 100%;
+    }
+
+    h3 {
+        color: $color-green-deep;
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    p {
+        color: $color-text-primary;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 8px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+        
+        strong {
+            color: $color-green-deep;
+            font-weight: 600;
+        }
+    }
 }
 
 .card-suggestion {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
-
-  h3 {
-    color: $color-green-deep;
-    margin-bottom: 8px;
-  }
-
-  p {
-    color: $color-text-secondary;
-    font-size: 0.95rem;
-  }
-
-  label {
-    font-weight: 600;
-    color: $color-text-primary;
-    margin-bottom: 4px;
-  }
-
-  textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     width: 100%;
-    padding: 10px 12px;
-    border: 2px solid $color-border;
-    border-radius: 8px;
-    background-color: $color-bg-light-surface;
-    font-size: 1rem;
-    color: $color-text-primary;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    resize: none;
-    min-height: 120px;
 
-    &:focus {
-      border-color: $color-border-focus;
-      box-shadow: 0 0 6px rgba($color-green-mid, 0.4);
+    label {
+        font-weight: 600;
+        color: $color-text-primary;
+        font-size: 0.9rem;
     }
 
-    &::placeholder {
-      color: $color-text-placeholder;
-    }
-  }
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid $color-border; // Padrão fino do login
+        border-radius: 8px;
+        background-color: $color-bg-light-surface;
+        font-size: 1rem;
+        color: $color-text-primary;
+        outline: none;
+        transition: all 0.2s ease;
+        resize: none;
+        min-height: 150px;
 
-  button {
-    align-self: flex-end;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    background-color: $color-green-mid;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+        &:focus {
+            border-color: $color-border-focus;
+            box-shadow: 0 0 0 3px rgba($color-green-mid, 0.15);
+            background-color: $color-bg-primary;
+        }
 
-    &:hover {
-      background-color: $color-green-deep;
+        &::placeholder {
+            color: $color-text-placeholder;
+        }
     }
 
-    &:active {
-      transform: scale(0.97);
+    button {
+        align-self: flex-end;
+        padding: 10px 24px;
+        border-radius: 8px;
+        border: none;
+        background-color: $color-green-deep;
+        color: $color-bg-primary;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: $color-green-mid;
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
     }
-  }
+    
+}
+
+$spoiler-color: rgb(179, 187, 179);
+// Classe específica para o card inferior caso precise de algum ajuste único no futuro
+.card-contact {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    
+
+    .spoiler {
+      background-color: $spoiler-color;
+      color: $spoiler-color;
+      border-radius: 4px;
+      border: none;
+      padding: 2px 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-left: 8px;
+
+      &:focus {
+        color: $color-text-primary;
+        background-color: transparent;
+      }
+      transition: all 0.2s ease;
+    }
 }

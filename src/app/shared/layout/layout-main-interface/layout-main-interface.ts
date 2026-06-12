@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink} from "@angular/router";
-import { AuthService } from '../../../core/services/auth.service';
+import { NavFloat } from "../../ui/nav-float/nav-float";
 
 @Component({
   selector: 'app-layout-main-interface',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, NavFloat],
   templateUrl: './layout-main-interface.html',
   styleUrl: './layout-main-interface.scss',
 })
