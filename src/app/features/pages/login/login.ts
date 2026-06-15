@@ -1,6 +1,6 @@
 // src/app/features/pages/login/login.ts
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DefaultLoginLayout } from '../../../shared/layout/default-login-layout/default-login-layout';
 import { FormGroup, ReactiveFormsModule, Validators, FormControl } from '@angular/forms';
 import { PrimaryInput } from '../../../shared/ui/primary-input/primary-input';
@@ -20,8 +20,9 @@ interface LoginForm {
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login {
+export class Login implements OnInit {
   loginForm!: FormGroup<LoginForm>;
+  isDisabled = true; // Controla se o botão de esquecer senha está desativado visualmente
 
   constructor(
     private router: Router,
@@ -34,6 +35,47 @@ export class Login {
     });
   }
 
+  ngOnInit(): void {
+    // Escuta em tempo real o que é digitado no campo de e-mail
+    this.loginForm.get('email')?.valueChanges.subscribe((value) => {
+      const emailValue = value || '';
+      const emailControl = this.loginForm.get('email');
+
+      // Se tiver mais de 5 caracteres e passar no validador de e-mail do Angular, habilita o botão
+      if (emailValue.length > 5 && emailControl?.valid) {
+        this.isDisabled = false;
+      } else {
+        this.isDisabled = true;
+      }
+    });
+  }
+
+  // Método chamado ao clicar no botão "Esqueceu a senha?"
+  handleForgotPassword() {
+    // Segurança extra: se por algum motivo for clicado enquanto desativado, ignora
+    if (this.isDisabled) return;
+
+    const email = this.loginForm.get('email')?.value;
+
+    this.toastService.info('Verificando e-mail no sistema...');
+
+    // Faz a chamada para o Back-end verificar a existência no banco de dados
+    this.authService.checkEmailExists(email!).subscribe({
+      next: (exists) => {
+        if (exists) {
+          this.toastService.success('E-mail localizado! Redirecionando...');
+          // Se o e-mail existe, navega para a tela de reset
+          this.router.navigate(['/password-reset'], { queryParams: { email: email } });
+        } else {
+          this.toastService.error('Este e-mail não está cadastrado no sistema.');
+        }
+      },
+      error: (err) => {
+        this.toastService.error('Erro ao validar o e-mail. Tente novamente mais tarde.');
+      }
+    });
+  }
+
   submit() {
     if (this.loginForm.invalid) return;
 
@@ -42,11 +84,9 @@ export class Login {
     this.authService.login(email!, password!).subscribe({
       next: (response) => {
         this.toastService.success(`Bem-vindo, ${response.username}!`);
-        // Redireciona pro home após login
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        // 401 = credenciais inválidas
         if (err.status === 401) {
           this.toastService.error('Email ou senha inválidos.');
         } else {

@@ -4,13 +4,48 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    margin-bottom: 34px;
+    gap: 20px; // Reduzi levemente para os inputs não espalharem tanto verticalmente
+    margin-bottom: 24px;
 
-    a {
+    // Alinha os elementos internos de navegação/links à direita
+    display: flex;
+    flex-direction: column;
+
+    // Estilização unificada para o link e para o botão "route-clear"
+    a, .route-clear {
         font-size: 14px;
+        font-family: inherit;
         text-decoration: underline;
-        color: $color-link;
+        color: $color-link; // O tom esverdeado de link do Project-Éden
         text-align: end;
+        align-self: flex-end; // Garante o alinhamento à direita no container flex
+        transition: color 0.2s ease, opacity 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+            color: darken($color-link, 10%); // Feedback visual sutil no hover
+        }
     }
+
+    // Reset completo para o botão "Esqueceu a senha?" parecer um link puro
+    .route-clear {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-weight: normal;
+
+        &:disabled {
+            color: #9ca3af;
+            cursor: not-allowed;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+    }
+}
+
+// Estilização opcional caso queira dar um espaçamento extra específico entre os links
+form > app-primary-input + .route-clear {
+    margin-top: -4px; // Aproxima o "Esqueceu a senha?" do input de password
 }

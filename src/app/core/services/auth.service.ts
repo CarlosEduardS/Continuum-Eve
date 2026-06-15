@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { tap } from 'rxjs';
+import { tap, map, Observable, catchError, of } from 'rxjs';
 import { AuthResponse } from '../../shared/types/auth-response.type';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   IsAdmin = false;
   private http = inject(HttpClient);
@@ -38,6 +37,30 @@ export class AuthService {
       );
   }
 
+  // ── Check Email Exists ──────────────────────────────────────────────────────
+  // Envia o e-mail para o backend validar se já existe no banco de dados
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http
+      .post<{ exists: boolean }>(`${this.apiUrl}/check-email`, { email })
+      .pipe(
+        map(response => response.exists),
+        catchError(() => {
+          // Caso o backend retorne um erro (como 404), tratamos como falso com segurança
+          return of(false);
+        })
+      );
+  }
+
+  // ── Reset Password ──────────────────────────────────────────────────────────
+  // Envia os dados para redefinir a senha do usuário
+  resetPassword(email: string, code: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
+      email,
+      code,
+      newPassword
+    });
+  }
+
   // ── Logout ──────────────────────────────────────────────────────────────────
   logout(): void {
     sessionStorage.clear();
@@ -67,6 +90,6 @@ export class AuthService {
     sessionStorage.setItem('userId', response.userId.toString());
     sessionStorage.setItem('isAdmin', response.isAdmin.toString());
     sessionStorage.setItem('imgUrl', response.imgUrl);
-    sessionStorage.setItem('dateCreate', response.createAt)
+    sessionStorage.setItem('dateCreate', response.createAt);
   }
 }

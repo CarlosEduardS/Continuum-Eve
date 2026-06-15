@@ -25,7 +25,7 @@
         >
             <img src="../../../../assets/svg/password-icon.svg" alt="">
         </app-primary-input>
-        <a routerLink="/password-reset">Esqueceu a senha?</a>
+        <button class="route-clear" (click)="handleForgotPassword()" [disabled]="isDisabled">Esqueceu a senha?</button>
         <a routerLink="/home">Ir para a tela Home</a>
     </form>
 </app-default-login-layout>
