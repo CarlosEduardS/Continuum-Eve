@@ -64,7 +64,6 @@
         border-radius: 50%;
         display: inline-block;
         
-        // Exemplo de classe dinâmica se você mudar a cor pelo estado do robô
         &.carregando {
             background-color: #f1c40f; // Amarelo carregando
             box-shadow: 0 0 8px rgba(#f1c40f, 0.6);
