@@ -18,10 +18,52 @@
           <p class="hint">
             Conecte um controle e pressione qualquer botão para ativar.
           </p>
+
+          <div class="virtual-controls" aria-label="Controles virtuais">
+            <span class="virtual-controls-title">Ou controle pela tela</span>
+            <div class="virtual-pad">
+              <button
+                type="button"
+                class="virtual-button virtual-button-forward"
+                aria-label="Mover para frente"
+                (pointerdown)="sendVirtualCommand(0, 1)"
+                (pointerup)="stopVirtualCommand()"
+                (pointerleave)="stopVirtualCommand()"
+                (pointercancel)="stopVirtualCommand()"
+              >Frente</button>
+              <button
+                type="button"
+                class="virtual-button virtual-button-left"
+                aria-label="Virar para a esquerda"
+                (pointerdown)="sendVirtualCommand(-1, 0)"
+                (pointerup)="stopVirtualCommand()"
+                (pointerleave)="stopVirtualCommand()"
+                (pointercancel)="stopVirtualCommand()"
+              >Esquerda</button>
+              <button
+                type="button"
+                class="virtual-button virtual-button-right"
+                aria-label="Virar para a direita"
+                (pointerdown)="sendVirtualCommand(1, 0)"
+                (pointerup)="stopVirtualCommand()"
+                (pointerleave)="stopVirtualCommand()"
+                (pointercancel)="stopVirtualCommand()"
+              >Direita</button>
+              <button
+                type="button"
+                class="virtual-button virtual-button-backward"
+                aria-label="Mover para ré"
+                (pointerdown)="sendVirtualCommand(0, -1)"
+                (pointerup)="stopVirtualCommand()"
+                (pointerleave)="stopVirtualCommand()"
+                (pointercancel)="stopVirtualCommand()"
+              >Ré</button>
+            </div>
+          </div>
         }
       
         <!-- ── HUD principal ─────────────────────────────────────────────── -->
-        @if (isConnected()) {
+        @if (isConnected() || virtualActive()) {
           <div class="hud">
       
             <!-- Direção textual -->

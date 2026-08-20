@@ -32,6 +32,9 @@ export class Controller implements OnInit, OnDestroy {
   // Indica se o controle está conectado
   readonly isConnected = signal(false);
 
+  // Indica se o controle virtual já foi usado
+  readonly virtualActive = signal(false);
+
   // Direção textual calculada a partir de x e y — pra mostrar no HUD
   readonly direction = signal('Parado');
 
@@ -104,5 +107,23 @@ export class Controller implements OnInit, OnDestroy {
   // Converte o valor de direção X pra uma posição visual na barra (-100% a +100%)
   toOffsetPercent(value: number): number {
     return Math.round(value * 100);
+  }
+
+  sendVirtualCommand(x: number, y: number): void {
+    const command: GamepadCommand = {
+      x,
+      y,
+      connected: false,
+      gamepadId: 'Controle virtual'
+    };
+
+    this.virtualActive.set(true);
+    this.currentCommand.set(command);
+    this.direction.set(this.calculateDirection(command));
+    this.robotService.sendCommand(command);
+  }
+
+  stopVirtualCommand(): void {
+    this.sendVirtualCommand(0, 0);
   }
 }
