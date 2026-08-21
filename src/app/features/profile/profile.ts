@@ -26,7 +26,7 @@ export class Profile {
 
   // Função que será disparada ao clicar no botão
   onLogout(): void {
-    // 1. Limpa os dados do sessionStorage através do serviço que criamos
+    // 1. Limpa os dados de autenticação através do serviço que criamos
     this.authService.logout();
 
     // 2. Redireciona o usuário para a tela de login imediatamente

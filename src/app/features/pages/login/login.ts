@@ -55,6 +55,23 @@ export class Login implements OnInit {
     });
   }
 
+  handleEnter(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const inputs = Array.from(input.form?.querySelectorAll('input') ?? []);
+    const currentIndex = inputs.indexOf(input);
+
+    if (currentIndex < 0) return;
+
+    event.preventDefault();
+
+    if (currentIndex < inputs.length - 1) {
+      inputs[currentIndex + 1].focus();
+      return;
+    }
+
+    this.submit();
+  }
+
   // Método chamado ao clicar no botão "Esqueceu a senha?"
   handleForgotPassword() {
     // Segurança extra: se por algum motivo for clicado enquanto desativado, ignora
