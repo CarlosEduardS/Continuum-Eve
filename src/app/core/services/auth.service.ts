@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { tap } from 'rxjs';
+import { tap, map, Observable, catchError, of } from 'rxjs';
 import { AuthResponse } from '../../shared/types/auth-response.type';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   IsAdmin = false;
   private http = inject(HttpClient);
@@ -38,35 +37,64 @@ export class AuthService {
       );
   }
 
+  // ── Check Email Exists ──────────────────────────────────────────────────────
+  // Envia o e-mail para o backend validar se já existe no banco de dados
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http
+      .post<{ exists: boolean }>(`${this.apiUrl}/check-email`, { email })
+      .pipe(
+        map(response => response.exists),
+        catchError(() => {
+          // Caso o backend retorne um erro (como 404), tratamos como falso com segurança
+          return of(false);
+        })
+      );
+  }
+
+  // ── Reset Password ──────────────────────────────────────────────────────────
+  // Envia os dados para redefinir a senha do usuário
+  resetPassword(email: string, code: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
+      email,
+      code,
+      newPassword
+    });
+  }
+
   // ── Logout ──────────────────────────────────────────────────────────────────
   logout(): void {
-    sessionStorage.clear();
+    localStorage.removeItem('auth-token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('imgUrl');
+    localStorage.removeItem('dateCreate');
   }
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
 
-  // Verifica se há um token salvo na sessão
+  // Verifica se há um token salvo no navegador
   isLoggedIn(): boolean {
-    return !!sessionStorage.getItem('auth-token');
+    return !!localStorage.getItem('auth-token');
   }
 
   // Retorna true se o usuário logado é admin
   isAdmin(): boolean {
-    return sessionStorage.getItem('isAdmin') === 'true';
+    return localStorage.getItem('isAdmin') === 'true';
   }
 
   // Retorna o token salvo
   getToken(): string | null {
-    return sessionStorage.getItem('auth-token');
+    return localStorage.getItem('auth-token');
   }
 
-  // Salva os dados da resposta do backend na sessionStorage
+  // Salva os dados da resposta do backend no navegador
   private saveSession(response: AuthResponse): void {
-    sessionStorage.setItem('auth-token', response.token);
-    sessionStorage.setItem('username', response.username);
-    sessionStorage.setItem('userId', response.userId.toString());
-    sessionStorage.setItem('isAdmin', response.isAdmin.toString());
-    sessionStorage.setItem('imgUrl', response.imgUrl);
-    sessionStorage.setItem('dateCreate', response.createAt)
+    localStorage.setItem('auth-token', response.token);
+    localStorage.setItem('username', response.username);
+    localStorage.setItem('userId', response.userId.toString());
+    localStorage.setItem('isAdmin', response.isAdmin.toString());
+    localStorage.setItem('imgUrl', response.imgUrl);
+    localStorage.setItem('dateCreate', response.createAt);
   }
 }

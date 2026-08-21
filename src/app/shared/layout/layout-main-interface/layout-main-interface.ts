@@ -10,5 +10,5 @@ import { NavFloat } from "../../ui/nav-float/nav-float";
   styleUrl: './layout-main-interface.scss',
 })
 export class LayoutMainInterface {
-  IsAdmin = sessionStorage.getItem('isAdmin') === 'true';
+  IsAdmin = localStorage.getItem('isAdmin') === 'true';
 }

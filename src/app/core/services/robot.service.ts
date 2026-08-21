@@ -1,31 +1,55 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
+import { Injectable, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { Subject } from 'rxjs';
 import { GamepadCommand } from '../models/gamepad-command.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RobotService {
+export class RobotService implements OnDestroy {
 
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly commandUrl = 'http://localhost:5171/api/robot/command';
+  private readonly robotHubUrl = 'http://localhost:5171/robotHub';
+  private readonly hubConnection: HubConnection | null;
 
-  // URL base do Adan-Stella — ajustar quando o backend estiver pronto
-  private readonly apiUrl = 'http://localhost:5171/api/robot';
+  readonly robotData$ = new Subject<unknown>();
 
-  // ─── Stub ─────────────────────────────────────────────────────────────────
-  // Por enquanto só loga no console
-  // Quando o .NET estiver pronto, descomentar o http.post e remover o console.log
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.hubConnection = new HubConnectionBuilder()
+        .withUrl(this.robotHubUrl)
+        .withAutomaticReconnect()
+        .configureLogging(LogLevel.Information)
+        .build();
+
+      this.hubConnection.on('ReceiveRobotData', (data: unknown) => {
+        this.robotData$.next(data);
+      });
+
+      void this.hubConnection.start().catch((error: unknown) => {
+        console.error('[RobotService] Erro ao conectar ao hub:', error);
+      });
+    } else {
+      this.hubConnection = null;
+    }
+  }
+
   sendCommand(command: GamepadCommand): void {
-    const payload = {
-      x: parseFloat(command.x.toFixed(2)), // arredonda pra 2 casas — o ESP32 não precisa de mais precisão
-      y: parseFloat(command.y.toFixed(2))
-    };
+    const x = parseFloat(command.x.toFixed(2));
+    const y = parseFloat(command.y.toFixed(2));
 
-    console.log('[RobotService] Comando:', payload);
+    this.http.post(this.commandUrl, { x, y }).subscribe({
+      next: () => console.log('[RobotService] Comando enviado:', { x, y }),
+      error: (error: unknown) => console.error('[RobotService] Erro ao enviar comando:', error)
+    });
+  }
 
-    // TODO: descomentar quando o Adan-Stella estiver com o endpoint pronto
-    // this.http.post(`${this.apiUrl}/command`, payload).subscribe({
-    //   error: (err) => console.error('[RobotService] Erro ao enviar comando:', err)
-    // });
+  ngOnDestroy(): void {
+    this.robotData$.complete();
+    void this.hubConnection?.stop();
   }
 }
