@@ -28,14 +28,31 @@ export class Signup {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
   ) {
     this.SignupForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordConfirme: new FormControl('', [Validators.required, Validators.minLength(6)])
+      passwordConfirme: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
+  }
+
+  handleEnter(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const inputs = Array.from(input.form?.querySelectorAll('input') ?? []);
+    const currentIndex = inputs.indexOf(input);
+
+    if (currentIndex < 0) return;
+
+    event.preventDefault();
+
+    if (currentIndex < inputs.length - 1) {
+      inputs[currentIndex + 1].focus();
+      return;
+    }
+
+    this.submit();
   }
 
   submit() {
@@ -62,7 +79,7 @@ export class Signup {
         } else {
           this.toastService.error('Erro ao criar conta. Tente novamente.');
         }
-      }
+      },
     });
   }
 

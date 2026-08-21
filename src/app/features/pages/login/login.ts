@@ -27,15 +27,20 @@ export class Login implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
     // Escuta em tempo real o que é digitado no campo de e-mail
     this.loginForm.get('email')?.valueChanges.subscribe((value) => {
       const emailValue = value || '';
@@ -48,6 +53,23 @@ export class Login implements OnInit {
         this.isDisabled = true;
       }
     });
+  }
+
+  handleEnter(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const inputs = Array.from(input.form?.querySelectorAll('input') ?? []);
+    const currentIndex = inputs.indexOf(input);
+
+    if (currentIndex < 0) return;
+
+    event.preventDefault();
+
+    if (currentIndex < inputs.length - 1) {
+      inputs[currentIndex + 1].focus();
+      return;
+    }
+
+    this.submit();
   }
 
   // Método chamado ao clicar no botão "Esqueceu a senha?"
@@ -72,7 +94,7 @@ export class Login implements OnInit {
       },
       error: (err) => {
         this.toastService.error('Erro ao validar o e-mail. Tente novamente mais tarde.');
-      }
+      },
     });
   }
 
@@ -92,7 +114,7 @@ export class Login implements OnInit {
         } else {
           this.toastService.error('Erro ao fazer login. Tente novamente.');
         }
-      }
+      },
     });
   }
 

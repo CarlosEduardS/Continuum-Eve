@@ -22,33 +22,29 @@ export class AuthService {
         tap((response) => {
           // Salva o token e dados do usuário na sessão
           this.saveSession(response);
-        })
+        }),
       );
   }
 
   // ── Login ───────────────────────────────────────────────────────────────────
   login(email: string, password: string) {
-    return this.http
-      .post<AuthResponse>(`${this.apiUrl}/login`, { email, password })
-      .pipe(
-        tap((response) => {
-          this.saveSession(response);
-        })
-      );
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap((response) => {
+        this.saveSession(response);
+      }),
+    );
   }
 
   // ── Check Email Exists ──────────────────────────────────────────────────────
   // Envia o e-mail para o backend validar se já existe no banco de dados
   checkEmailExists(email: string): Observable<boolean> {
-    return this.http
-      .post<{ exists: boolean }>(`${this.apiUrl}/check-email`, { email })
-      .pipe(
-        map(response => response.exists),
-        catchError(() => {
-          // Caso o backend retorne um erro (como 404), tratamos como falso com segurança
-          return of(false);
-        })
-      );
+    return this.http.post<{ exists: boolean }>(`${this.apiUrl}/check-email`, { email }).pipe(
+      map((response) => response.exists),
+      catchError(() => {
+        // Caso o backend retorne um erro (como 404), tratamos como falso com segurança
+        return of(false);
+      }),
+    );
   }
 
   // ── Reset Password ──────────────────────────────────────────────────────────
@@ -57,7 +53,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/reset-password`, {
       email,
       code,
-      newPassword
+      newPassword,
     });
   }
 
@@ -75,7 +71,7 @@ export class AuthService {
 
   // Verifica se há um token salvo no navegador
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('auth-token');
+    return typeof localStorage !== 'undefined' && !!localStorage.getItem('auth-token');
   }
 
   // Retorna true se o usuário logado é admin
