@@ -16,10 +16,10 @@ export class Profile {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  username = sessionStorage.getItem('username') || 'Usuário';
-  isAdmin  = sessionStorage.getItem('isAdmin') === 'true';
+  username = localStorage.getItem('username') || 'Usuário';
+  isAdmin  = localStorage.getItem('isAdmin') === 'true';
   
-  private dateStr = sessionStorage.getItem('dateCreate');
+  private dateStr = localStorage.getItem('dateCreate');
   date: Date | null = this.dateStr ? new Date(this.dateStr) : null;
  
   badge = this.isAdmin ? 'Administrador' : 'Membro';

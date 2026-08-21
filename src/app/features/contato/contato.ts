@@ -10,8 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contato.scss',
 })
 export class Contato {
-  username = sessionStorage.getItem('username');
-  email = sessionStorage.getItem('email');
+  username = localStorage.getItem('username');
+  email = localStorage.getItem('email');
   message = ''
 
   SetMessageSuggestions(){
