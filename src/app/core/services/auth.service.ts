@@ -63,33 +63,38 @@ export class AuthService {
 
   // ── Logout ──────────────────────────────────────────────────────────────────
   logout(): void {
-    sessionStorage.clear();
+    localStorage.removeItem('auth-token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('imgUrl');
+    localStorage.removeItem('dateCreate');
   }
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
 
-  // Verifica se há um token salvo na sessão
+  // Verifica se há um token salvo no navegador
   isLoggedIn(): boolean {
-    return !!sessionStorage.getItem('auth-token');
+    return !!localStorage.getItem('auth-token');
   }
 
   // Retorna true se o usuário logado é admin
   isAdmin(): boolean {
-    return sessionStorage.getItem('isAdmin') === 'true';
+    return localStorage.getItem('isAdmin') === 'true';
   }
 
   // Retorna o token salvo
   getToken(): string | null {
-    return sessionStorage.getItem('auth-token');
+    return localStorage.getItem('auth-token');
   }
 
-  // Salva os dados da resposta do backend na sessionStorage
+  // Salva os dados da resposta do backend no navegador
   private saveSession(response: AuthResponse): void {
-    sessionStorage.setItem('auth-token', response.token);
-    sessionStorage.setItem('username', response.username);
-    sessionStorage.setItem('userId', response.userId.toString());
-    sessionStorage.setItem('isAdmin', response.isAdmin.toString());
-    sessionStorage.setItem('imgUrl', response.imgUrl);
-    sessionStorage.setItem('dateCreate', response.createAt);
+    localStorage.setItem('auth-token', response.token);
+    localStorage.setItem('username', response.username);
+    localStorage.setItem('userId', response.userId.toString());
+    localStorage.setItem('isAdmin', response.isAdmin.toString());
+    localStorage.setItem('imgUrl', response.imgUrl);
+    localStorage.setItem('dateCreate', response.createAt);
   }
 }

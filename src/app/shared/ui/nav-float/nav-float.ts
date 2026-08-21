@@ -8,5 +8,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nav-float.scss',
 })
 export class NavFloat {
-  IsAdmin = sessionStorage.getItem('isAdmin') === 'true';
+  IsAdmin = localStorage.getItem('isAdmin') === 'true';
 }
